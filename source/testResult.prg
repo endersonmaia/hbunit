@@ -1,3 +1,5 @@
+#include "xhb.ch"
+
 /*
   testResult.prg
     test result gatherer class for the framework.
@@ -25,7 +27,7 @@ class TTestResult
     classdata nTestCases as numeric init 0
     classdata nAssertCount as numeric init 0
     
-  private:
+  hidden:
     method InvokeTestMethod()
     method GetTestMethods()
 

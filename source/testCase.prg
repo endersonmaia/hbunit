@@ -1,3 +1,5 @@
+#include "xhb.ch"
+
 /*
   testcase.prg
     to use the testing framework, one needs to inherit from this class

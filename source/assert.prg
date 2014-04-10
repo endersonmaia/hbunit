@@ -1,3 +1,5 @@
+#include "xhb.ch"
+
 /*
   assert.prg
     main assertion code to be used by the testing framework.  due to

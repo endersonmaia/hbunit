@@ -1,9 +1,10 @@
-# Automatically converted by hbmk2 from xMate project:
-# xhUnit.xhp
-
 -inc
 -incpath=include
--oLib/
+-incpath=${hb_addons}/xhb
+-lxhb
+-hblib
+-instpath=./lib
+-oxhunit
 source\textRunner.prg
 source\assert.prg
 source\test.prg
