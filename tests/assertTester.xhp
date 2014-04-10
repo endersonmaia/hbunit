@@ -1,0 +1,37 @@
+[Version]
+Type=xMate
+Number=1.9x3
+[Info]
+Type=Executable
+Architecture=BorlandDOS
+Include=
+Define=
+[xMate]
+Create Map/List File=No
+[Project]
+Run=
+Params=
+Final Path=%HOME%\Bin
+Maintain LNK=Yes
+Default Type=1
+[Files]
+%HOME%\assertTester.prg=1,.F.,0,0,
+%HOME%\assertTest.prg=2,.F.,1,1,
+C:\MyProjects\xhUnit\Lib\xhUnit.Lib=3,.F.,0,0,
+%C_LIB_INSTALL%\C0W32.OBJ=4,.T.,0,0,
+%HB_LIB_INSTALL%\bcc640.lib=5,.T.,0,0,
+%HB_LIB_INSTALL%\common.lib=6,.T.,0,0,
+%HB_LIB_INSTALL%\debug.lib=7,.T.,0,0,
+%HB_LIB_INSTALL%\vm.lib=8,.T.,0,0,
+%HB_LIB_INSTALL%\rtl.lib=9,.T.,0,0,
+%HB_LIB_INSTALL%\gtwin.lib=10,.T.,0,0,
+%HB_LIB_INSTALL%\lang.lib=11,.T.,0,0,
+%HB_LIB_INSTALL%\rdd.lib=12,.T.,0,0,
+%HB_LIB_INSTALL%\macro.lib=13,.T.,0,0,
+%HB_LIB_INSTALL%\pp.lib=14,.T.,0,0,
+%HB_LIB_INSTALL%\dbfntx.lib=15,.T.,0,0,
+%HB_LIB_INSTALL%\dbfcdx.lib=16,.T.,0,0,
+%C_LIB_INSTALL%\CW32.LIB=17,.T.,0,0,
+%C_LIB_INSTALL%\IMPORT32.LIB=18,.T.,0,0,
+%HB_LIB_INSTALL%\dbffpt.lib=19,.T.,0,0,
+%HB_LIB_INSTALL%\dbfdbt.lib=20,.T.,0,0,
