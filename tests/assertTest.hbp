@@ -1,0 +1,8 @@
+-inc
+-incpath=../include
+-incpath=${hb_addons}/xhb
+-lxhb
+-l../libxhunit.a
+-o../bin/
+./assertTest.prg
+./assertTester.prg

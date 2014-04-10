@@ -1,3 +1,4 @@
+#include "xhb.ch"
 #include "hbclass.ch"
 
 class TTestAssert inherit TTestCase
