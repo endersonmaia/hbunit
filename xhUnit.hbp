@@ -1,0 +1,13 @@
+# Automatically converted by hbmk2 from xMate project:
+# xhUnit.xhp
+
+-inc
+-incpath=include
+-oLib/
+source\textRunner.prg
+source\assert.prg
+source\test.prg
+source\testCase.prg
+source\testResult.prg
+source\testRunner.prg
+source\testSuite.prg

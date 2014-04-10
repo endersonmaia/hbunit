@@ -1,0 +1,7 @@
+# Automatically converted by hbmk2 from xMate project:
+# testTest.xhp
+
+-inc
+-oBin/
+tests\testTest.prg
+-lLib\xhUnit
