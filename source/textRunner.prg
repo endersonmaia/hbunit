@@ -1,55 +1,47 @@
 #include "xhb.ch"
-
-/*
-  textRunner.prg
-    console output class.
-  
-  dionisio olo
-*/
-
 #include "hbclass.ch"
 
-class TTextRunner inherit TTestRunner
-  method ShowResults()
-endclass
+CLASS TTextRunner inherit TTestRunner
+  METHOD showResults()
+ENDCLASS
 
-method ShowResults() class TTextRunner
-  local aErrors := ::oResult:GetErrors(),;
-        aFailures := ::oResult:GetFailures(),;
-        nTestCases := ::oResult:GetTestCasesCount(),;
-        nAsserts := ::oResult:GetAssertCount(),;
-        nErrors := Len( aErrors ),;
-        nFailures := Len( aFailures ),;
+METHOD showResults() CLASS TTextRunner
+  LOCAL aErrors := ::oResult:getErrors(),;
+        aFailures := ::oResult:getFailures(),;
+        nTestCases := ::oResult:getTestCasesCount(),;
+        nAsserts := ::oResult:getAssertCount(),;
+        nErrors := LEN( aErrors ),;
+        nFailures := LEN( aFailures ),;
         oError, oFailure,;
         i
 
-  ? "Testcases: " + LTrim( Str( nTestCases ))
-  ? "Asserts:   " + LTrim( Str( nAsserts ))
-  ? "Errors:    " + LTrim( Str( nErrors ))
-  ? "Failures:  " + LTrim( Str( nFailures ))
+  ? "Testcases: " + LTRIM( STR( nTestCases ))
+  ? "Asserts:   " + LTRIM( STR( nAsserts ))
+  ? "Errors:    " + LTRIM( STR( nErrors ))
+  ? "Failures:  " + LTRIM( STR( nFailures ))
 
-  if ( nErrors + nFailures == 0 )
+  IF( nErrors + nFailures == 0 )
     ?
     ? "Ok."
-  else
-    if ( nErrors > 0 )
+  ELSE
+    IF( nErrors > 0 )
       ?
       ? "Errors:"
 
-      for i := 1 to nErrors
+      FOR i := 1 to nErrors
         oError := aErrors[i]
-        ? PadL( i, 4 ), oError:Description, oError:Operation, if( !( Empty( oError:Args )), toStr( oError:Args ), "" )
-      next
-    endif
+        ? PADL( i, 4 ), oError:description, oError:operation, IF( !( Empty( oError:args )), toStr( oError:args ), "" )
+      NEXT
+    ENDIF
 
-    if ( nFailures > 0 )
+    IF( nFailures > 0 )
       ?
       ? "Failures:"
 
-      for i := 1 to nFailures
+      FOR i := 1 to nFailures
         oFailure := aFailures[i]
-        ? PadL( i, 4), oFailure:Description, if( !( Empty( oFailure:Args )), toStr( oFailure:Args ), "" )
-      next
-    endif
-  endif
-return ( nil )
+        ? PADL( i, 4), oFailure:description, IF( !( Empty( oFailure:args )), toStr( oFailure:args ), "" )
+      NEXT
+    ENDIF
+  ENDIF
+RETURN ( nil )

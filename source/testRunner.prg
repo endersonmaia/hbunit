@@ -1,22 +1,14 @@
-/*
-  testRunner.prg
-    base test runner class.  console and gui output classes are to
-    inherit from this class and provide console/gui functionality
-  
-  by: dionisio olo
-*/
-
 #include "hbclass.ch"
 
-class TTestRunner
-  method Run( oResult )
+CLASS TTestRunner
+  METHOD run( oResult )
 
-  protected:
-    method ShowResults()        virtual
-    data    oResult as object
-endclass
+  PROTECTED:
+    METHOD  showResults() VIRTUAL
+    DATA    oResult       AS OBJECT
+ENDCLASS
 
-method Run ( oTest ) class TTestRunner
-  ::oResult := oTest:Run()
-  ::ShowResults()
-  return ( NIL )
+METHOD run ( oTest ) CLASS TTestRunner
+  ::oResult := oTest:run()
+  ::showResults()
+  RETURN ( NIL )

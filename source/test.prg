@@ -1,22 +1,9 @@
-/*
-  test.prg
-    main parent class for the testing framework, just to provide
-    an interface.
-    
-  by: dionisio olo
-*/
-
 #include "hbclass.ch"
 
-class TTest
-  method CountTestCases()   virtual
-  method Run()              virtual
+CLASS TTest
+  METHOD countTestCases()   virtual
+  METHOD run()              virtual
   
-  //protected:
-    data  oResult init TTestResult():New()
-endclass
-
-
-
-
-
+  PROTECTED:
+    DATA  oResult INIT TTestResult():New()
+ENDCLASS

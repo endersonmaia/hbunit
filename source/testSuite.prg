@@ -1,19 +1,18 @@
 #include "hbclass.ch"
 
-class TTestSuite inherit TTest
-  method Run()
-  method CountTestCases()         inline  Len( ::aTests )
-  method AddTest( oTest )         inline  AAdd( ::aTests, oTest )
+CLASS TTestSuite INHERIT TTest
+  METHOD run()
+  METHOD countTestCases()  INLINE  LEN( ::aTests )
+  METHOD addTest( oTest )  INLINE  AADD( ::aTests, oTest )
   
-  protected:
-    data aTests as array init {}
-endclass
+  PROTECTED:
+    DATA aTests AS ARRAY INIT {}
+ENDCLASS
 
-method Run() class TTestSuite
-  local i
+METHOD run() CLASS TTestSuite
+  LOCAL i
   
-  for i := 1 to ::CountTestCases()
-    ::aTests[i]:Run()
-  next
-return ( ::oResult )
-
+  FOR i := 1 TO ::countTestCases()
+    ::aTests[i]:run()
+  NEXT
+RETURN ( ::oResult )

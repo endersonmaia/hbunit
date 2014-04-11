@@ -1,77 +1,67 @@
 #include "xhb.ch"
-
-/*
-  testResult.prg
-    test result gatherer class for the framework.
-  
-  by: dionisio olo
-*/
-
 #include "hbclass.ch"
 
-class TTestResult
-  method CountErrors()              inline  Len( ::aErrors )
-  method CountFailures()            inline  Len( ::aFailures )
-  method AddError( oError )         inline  AAdd( ::aErrors, oError )
-  method AddFailure( oFailure )     inline  AAdd( ::aFailures, oFailure )
-  method IncrementAssertCount()     inline  ::nAssertCount ++
-  method GetErrors()                inline  ::aErrors
-  method GetFailures()              inline  ::aFailures
-  method GetTestCasesCount()        inline  ::nTestCases
-  method GetAssertCount()           inline  ::nAssertCount
-  method Run()
+CLASS TTestResult
+  METHOD countErrors()              INLINE  Len( ::aErrors )
+  METHOD countFailures()            INLINE  Len( ::aFailures )
+  METHOD addError( oError )         INLINE  AAdd( ::aErrors, oError )
+  METHOD addFailure( oFailure )     INLINE  AAdd( ::aFailures, oFailure )
+  METHOD incrementAssertCount()     INLINE  ::nAssertCount ++
+  METHOD getErrors()                INLINE  ::aErrors
+  METHOD getFailures()              INLINE  ::aFailures
+  METHOD getTestCasesCount()        INLINE  ::nTestCases
+  METHOD getAssertCount()           INLINE  ::nAssertCount
+  METHOD run()
   
-  protected:
-    classdata aErrors as array init {}
-    classdata aFailures as array init {}
-    classdata nTestCases as numeric init 0
-    classdata nAssertCount as numeric init 0
+  PROTECTED:
+    CLASSDATA aErrors       AS ARRAY    INIT {}
+    CLASSDATA aFailures     AS ARRAY    INIT {}
+    CLASSDATA nTestCases    AS NUMERIC  INIT 0
+    CLASSDATA nAssertCount  AS NUMERIC  INIT 0
     
-  hidden:
-    method InvokeTestMethod()
-    method GetTestMethods()
+  HIDDEN:
+    METHOD invokeTestMethod()
+    METHOD getTestMethods()
 
-    data aMethods as array init {}
-endclass
+    DATA aMethods as array init {}
+ENDCLASS
 
-method Run( oTest ) class TTestResult
-  local cMethod, i
+METHOD run( oTest ) CLASS TTestResult
+  LOCAL cMethod, i
   
-  // ::StartTest()
-  SetAssertResultObject( Self )
-  ::GetTestMethods( oTest )
+  setAssertResultObject( Self )
+  ::getTestMethods( oTest )
   ::nTestCases += Len( ::aMethods )
 
-  for each cMethod in ::aMethods
-    ::InvokeTestMethod( oTest, "SETUP")
-    ::InvokeTestMethod( oTest, cMethod )
-    ::InvokeTestMethod( oTest, "TEARDOWN")
-  next
+  FOR each cMethod in ::aMethods
+    ::invokeTestMethod( oTest, "SETUP")
+    ::invokeTestMethod( oTest, cMethod )
+    ::invokeTestMethod( oTest, "TEARDOWN")
+  NEXT
+  RETURN ( NIL )
 
-// ::EndTest()
-return ( nil )
-
-method GetTestMethods( oTest ) class TTestResult
-  local aMethods := __objGetMethodList( oTest ),;
+METHOD GetTestMethods( oTest ) class TTestResult
+  LOCAL aMethods := __objGetMethodList( oTest ),;
         cMethod
   
   ::aMethods := {}
   
-  for each cMethod in aMethods
-    if ( left( cMethod, 4 ) == "TEST" )
+  FOR each cMethod in aMethods
+    IF ( left( cMethod, 4 ) == "TEST" )
       AAdd( ::aMethods, cMethod )
-    endif
-  next
-return ( nil )
+    ENDIF
+  NEXT
 
-method InvokeTestMethod( oTest, cMethod ) class TTestResult
-  local oError
+  RETURN ( NIL )
+
+METHOD InvokeTestMethod( oTest, cMethod ) class TTestResult
+  LOCAL oError
   
-  try
-    __ObjSendMsg( oTest, cMethod )         // invoke the method
+  TRY
+    __ObjSendMsg( oTest, cMethod )         // invoke the METHOD
     
-  catch oError
+  CATCH oError
     oError:Args := oTest:ClassName + ":" + cMethod
     ::AddError( oError )
-  end
-return ( nil )
+  END
+  RETURN ( NIL )

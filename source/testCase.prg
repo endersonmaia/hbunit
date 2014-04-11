@@ -1,26 +1,16 @@
 #include "xhb.ch"
-
-/*
-  testcase.prg
-    to use the testing framework, one needs to inherit from this class
-    and define the tests as methods with name starting with "test"
-    
-  by: dionisio olo
-*/
-
 #include "hbclass.ch"
 
-class TTestCase inherit TTest
-  method CountTestCases()         inline  1
-  method Run()
-  method SetUp()    virtual
-  method TearDown() virtual
+CLASS TTestCase inherit TTest
+  METHOD countTestCases() INLINE  1
+  METHOD run()
+  METHOD setUp()          VIRTUAL
+  METHOD tearDown()       VIRTUAL
 
-  protected:
-    data  oResult as object init TTestResult():New()
-endclass
+  PROTECTED:
+    DATA  oResult as object init TTestResult():New()
+ENDCLASS
 
-method Run() CLASS TTestCase
-  ::oResult:Run ( self )
-return ( ::oResult )
-
+METHOD run() CLASS TTestCase
+  ::oResult:run ( SELF )
+  RETURN ( ::oResult )
