@@ -1,6 +1,6 @@
 #include "hbclass.ch"
 
-class TTestSuiteTest inherit TTestCase
+class TTestTestSuite inherit TTestCase
   method testAddTest()
 endclass
 

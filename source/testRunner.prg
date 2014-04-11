@@ -11,7 +11,7 @@
 class TTestRunner
   method Run( oResult )
 
-  hidden:
+  protected:
     method ShowResults()        virtual
     data    oResult as object
 endclass
