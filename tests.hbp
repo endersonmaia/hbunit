@@ -3,7 +3,7 @@
 -incpath=${hb_addons}/xhb
 -lxhb
 -L./
--lxhunit
+-lhbunit
 -o./bin/
 ./tests/AllTestSuite.prg
 ./tests/assertTest.prg

@@ -1,13 +1,5 @@
 #include "xhb.ch"
 
-/*
-  assert.prg
-    main assertion code to be used by the testing framework.  due to
-    some difference with the Java coding, exact port from JUnit may
-    not be possible while maintaining PRG level coding only.
-    
-  by: dionisio olo
-*/
 static oResultObject
 
 function Fail( cMsg )
@@ -89,15 +81,3 @@ function ToStr( xVal, lUseQuote )
     cStr := "'" + cStr+ "'"
   endif
 return ( cStr )
-
-
-
-
-/*
- *      Throw( ErrorNew( "MySys", 1001, "MyOperation", "My Description", { "MyArg" } ) )
- *
- *      ? "Success"
- *      CATCH e
- *      ? "Caught", e:SubSystem, e:SubCode, e:Operation, e:Description, ValToPrg( e:Args )
- */
-
