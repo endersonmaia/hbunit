@@ -11,14 +11,12 @@
 class TTestRunner
   method Run( oResult )
 
-  protected:
+  hidden:
     method ShowResults()        virtual
     data    oResult as object
 endclass
 
-method Run ( oTest )
+method Run ( oTest ) class TTestRunner
   ::oResult := oTest:Run()
   ::ShowResults()
-return ( nil )
-
-
+  return ( NIL )

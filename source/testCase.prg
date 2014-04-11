@@ -20,7 +20,7 @@ class TTestCase inherit TTest
     data  oResult as object init TTestResult():New()
 endclass
 
-method Run()
+method Run() CLASS TTestCase
   ::oResult:Run ( self )
 return ( ::oResult )
 

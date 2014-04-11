@@ -1,3 +1,5 @@
+#include "xhb.ch"
+
 /*
   textRunner.prg
     console output class.
@@ -11,7 +13,7 @@ class TTextRunner inherit TTestRunner
   method ShowResults()
 endclass
 
-method ShowResults()
+method ShowResults() class TTextRunner
   local aErrors := ::oResult:GetErrors(),;
         aFailures := ::oResult:GetFailures(),;
         nTestCases := ::oResult:GetTestCasesCount(),;
@@ -36,7 +38,7 @@ method ShowResults()
 
       for i := 1 to nErrors
         oError := aErrors[i]
-        ? PadL( i, 4 ), oError:Description, oError:Operation, ToAssertStr( oError:Args )
+        ? PadL( i, 4 ), oError:Description, oError:Operation, if( !( Empty( oError:Args )), toStr( oError:Args ), "" )
       next
     endif
 
@@ -46,11 +48,8 @@ method ShowResults()
 
       for i := 1 to nFailures
         oFailure := aFailures[i]
-        ? PadL( i, 4), oFailure:Description, if( !( Empty( oFailure:Args )), ToAssertStr( oFailure:Args), "" )
+        ? PadL( i, 4), oFailure:Description, if( !( Empty( oFailure:Args )), toStr( oFailure:Args ), "" )
       next
     endif
   endif
 return ( nil )
-
-static function ToAssertStr( cArgs )
-return ( "[" + cArgs + "]" )

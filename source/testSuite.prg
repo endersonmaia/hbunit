@@ -9,7 +9,7 @@ class TTestSuite inherit TTest
     data aTests as array init {}
 endclass
 
-method Run()
+method Run() class TTestSuite
   local i
   
   for i := 1 to ::CountTestCases()

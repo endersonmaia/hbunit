@@ -34,7 +34,7 @@ class TTestResult
     data aMethods as array init {}
 endclass
 
-method Run( oTest )
+method Run( oTest ) class TTestResult
   local cMethod, i
   
   // ::StartTest()
@@ -51,7 +51,7 @@ method Run( oTest )
 // ::EndTest()
 return ( nil )
 
-method GetTestMethods( oTest )
+method GetTestMethods( oTest ) class TTestResult
   local aMethods := __objGetMethodList( oTest ),;
         cMethod
   
@@ -64,7 +64,7 @@ method GetTestMethods( oTest )
   next
 return ( nil )
 
-method InvokeTestMethod( oTest, cMethod )
+method InvokeTestMethod( oTest, cMethod ) class TTestResult
   local oError
   
   try
