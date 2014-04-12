@@ -1,5 +1,17 @@
-#include "xhb.ch"
-#include "hbclass.ch"
+//-- copyright
+// hbunit is a unit-testing framework for the Harbour language.
+//
+// Copyright (C) 2014 Enderson maia <endersonmaia _at_ gmail _dot_ com>
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// See COPYRIGHT for more details.
+//++
+
+#include "hbunit.ch"
 
 CLASS TTestCase inherit TTest
   METHOD countTestCases() INLINE  1
@@ -8,7 +20,7 @@ CLASS TTestCase inherit TTest
   METHOD tearDown()       VIRTUAL
 
   PROTECTED:
-    DATA  oResult as object init TTestResult():New()
+    DATA  oResult AS OBJECT INIT TTestResult():New()
 ENDCLASS
 
 METHOD run() CLASS TTestCase

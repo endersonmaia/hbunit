@@ -1,20 +1,20 @@
-#define ERROR_PROCEDUREDEPTH    3
+//-- copyright
+// hbunit is a unit-testing framework for the Harbour language.
+//
+// Copyright (C) 2014 Enderson maia <endersonmaia _at_ gmail _dot_ com>
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// See COPYRIGHT for more details.
+//++
 
-#define ERROR_EXECUTION         9000
-#define ERROR_ASSERTION         9001
-#define ERROR_UNKNOWNASSERTION  9002
+#ifndef _HBUNIT_CH
+#define _HBUNIT_CH
 
-#define ASSERT_FAILURE          8000
-#define ASSERT_EQUALS           8001
-#define ASSERT_NOTEQUALS        8002
-#define ASSERT_TRUE             8003
-#define ASSERT_FALSE            8004
+#include "hbcompat.ch"
+#include "hbclass.ch"
 
-#define ASSERTTEXT_SUBSYS       "AssertSubSys"
-#define ASSERTTEXT_FAILURE      "EAssertFailure"
-#define ASSERTTEXT_ERROR        "EAssertError"
-#define ASSERTTEXT_EQUALS       "Assert Equality"
-#define ASSERTTEXT_NOTEQUALS    "Assert Inequality"
-#define ASSERTTEXT_TRUE         "Assert Truth"
-#define ASSERTTEXT_FALSE        "Assert Falsity"
-
+#endif // _HBUNIT_CH

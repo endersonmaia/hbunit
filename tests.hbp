@@ -1,4 +1,4 @@
-#-inc
+-inc
 -incpath=./include
 -incpath=${hb_addons}/xhb
 -lxhb

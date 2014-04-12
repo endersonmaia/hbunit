@@ -1,0 +1,66 @@
+# [ALPHA] hbunit is a unit-testing framework for the Harbour language.
+
+This is a initial work on porting the jUnit Java unit-testing framework to the Harbour languages, based on the xhUnit project.
+
+## Buildind and Testing
+
+Considering you have Habour (http://harbour.github.io) installed, you can run the following commands to try hbunit.
+
+To build the library, run this: 
+
+````
+$> hbmk2 lib.hbp
+````
+
+To run the tests, run this:
+
+````
+$> hbmk2 tests.hbp
+$> ./bin/AllTestSuite
+````
+
+# License
+
+<pre>
+hbunit is a unit-testing framework for the Harbour language.
+
+Copyright (C) 2014 Enderson maia <endersonmaia _at_ gmail _dot_ com>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+---
+
+hbunit is a derivative work based on xhUnit, whose Copyright follows.
+
+xhUnit: A Testing Framework for xHarbour
+
+Copyright (C) 2004-2013 dionisio c. olo <http://sourceforge.net/projects/xhunit/>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+</pre>
+
+See COPYRIGHT.
