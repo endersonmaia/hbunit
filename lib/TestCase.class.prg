@@ -13,7 +13,7 @@
 
 #include "hbunit.ch"
 
-CLASS TTestCase inherit TTest
+CLASS TTestCase INHERIT TAssert, TTest
   METHOD countTestCases() INLINE  1
   METHOD run()
   METHOD setUp()          VIRTUAL

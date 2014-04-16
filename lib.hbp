@@ -4,7 +4,7 @@ xhb.hbc
 -hblib
 -ohbunit
 lib\TextRunner.class.prg
-lib\assert.prg
+lib\Assert.class.prg
 lib\Test.class.prg
 lib\TestCase.class.prg
 lib\TestResult.class.prg
