@@ -15,7 +15,13 @@
 
 CLASS TTextRunner inherit TTestRunner
   METHOD showResults()
+  METHOD run( oTest )
 ENDCLASS
+
+METHOD run( oTest ) CLASS TTextRunner
+  OutStd( "." )
+  ::super:run( oTest )
+  RETURN ( NIL )
 
 METHOD showResults() CLASS TTextRunner
   LOCAL aErrors := ::oResult:getErrors(),;
@@ -27,14 +33,14 @@ METHOD showResults() CLASS TTextRunner
         oError, oFailure,;
         i
 
-  ? "Testcases: " + LTRIM( STR( nTestCases ))
-  ? "Asserts:   " + LTRIM( STR( nAsserts ))
-  ? "Errors:    " + LTRIM( STR( nErrors ))
-  ? "Failures:  " + LTRIM( STR( nFailures ))
+  OutStd( hb_EOL() )
+  OutStd( "Testcases: ", LTRIM( STR( nTestCases ) ), hb_EOL() )
+  OutStd( "Asserts:   ", LTRIM( STR( nAsserts   ) ), hb_EOL() )
+  OutStd( "Errors:    ", LTRIM( STR( nErrors    ) ), hb_EOL() )
+  OutStd( "Failures:  ", LTRIM( STR( nFailures  ) ), hb_EOL() )
 
   IF( nErrors + nFailures == 0 )
-    ?
-    ? "Ok."
+    OutStd( hb_EOL(), "Ok." )
   ELSE
     IF( nErrors > 0 )
       ?
@@ -42,7 +48,12 @@ METHOD showResults() CLASS TTextRunner
 
       FOR i := 1 to nErrors
         oError := aErrors[i]
-        ? PADL( i, 4 ), oError:description, oError:operation, IF( !( Empty( oError:args )), toStr( oError:args ), "" )
+
+        OutErr( PADL( i, 4 ), ;
+                ", Desc: "      , oError:description,   ;
+                ", Operation: " , oError:operation,     ;
+                " Args: "       , toStr( oError:args )  ;
+              )
       NEXT
     ENDIF
 
@@ -52,7 +63,10 @@ METHOD showResults() CLASS TTextRunner
 
       FOR i := 1 to nFailures
         oFailure := aFailures[i]
-        ? PADL( i, 4), oFailure:description, IF( !( Empty( oFailure:args )), toStr( oFailure:args ), "" )
+        OutErr( PADL( i, 4 ), ;
+                ", Desc: "      , oFailure:description, ;
+                " Args: "       , IIF( !( EMPTY( oFailure:args ) ), toStr( oError:args ), ) ;
+              )
       NEXT
     ENDIF
   ENDIF
