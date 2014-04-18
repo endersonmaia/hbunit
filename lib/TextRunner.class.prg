@@ -15,13 +15,7 @@
 
 CLASS TTextRunner inherit TTestRunner
   METHOD showResults()
-  METHOD run( oTest )
 ENDCLASS
-
-METHOD run( oTest ) CLASS TTextRunner
-  OutStd( "." )
-  ::super:run( oTest )
-  RETURN ( NIL )
 
 METHOD showResults() CLASS TTextRunner
   LOCAL aErrors := ::oResult:getErrors(),;
@@ -43,30 +37,20 @@ METHOD showResults() CLASS TTextRunner
     OutStd( hb_EOL(), "Ok." )
   ELSE
     IF( nErrors > 0 )
-      ?
-      ? "Errors:"
+      OutStd( hb_EOL(), "Errors:", hb_EOL() ) 
 
       FOR i := 1 to nErrors
         oError := aErrors[i]
-
-        OutErr( PADL( i, 4 ), ;
-                ", Desc: "      , oError:description,   ;
-                ", Operation: " , oError:operation,     ;
-                " Args: "       , toStr( oError:args )  ;
-              )
+        OutErr ( PADL( i, 4 ), oError:description, oError:operation, IF( !( Empty( oError:args )), toStr( oError:args ), "" ), hb_EOL() )
       NEXT
     ENDIF
 
-    IF( nFailures > 0 )
-      ?
-      ? "Failures:"
+    IF( nFailures > 0 )    
+      OutStd( hb_EOL(), "Failures:", hb_EOL() ) 
 
       FOR i := 1 to nFailures
         oFailure := aFailures[i]
-        OutErr( PADL( i, 4 ), ;
-                ", Desc: "      , oFailure:description, ;
-                " Args: "       , IIF( !( EMPTY( oFailure:args ) ), toStr( oError:args ), ) ;
-              )
+        OutErr( PADL( i, 4), oFailure:description, "" , hb_EOL() )
       NEXT
     ENDIF
   ENDIF

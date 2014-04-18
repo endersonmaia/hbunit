@@ -14,7 +14,7 @@
 #include "hbunit.ch"
 
 CLASS TTestRunner
-  METHOD run( oResult )
+  METHOD run( oTest )
 
   PROTECTED:
     METHOD  showResults() VIRTUAL

@@ -14,7 +14,6 @@
 #include "hbunit.ch"
 
 CLASS TTestCase INHERIT TAssert, TTest
-  METHOD countTestCases() INLINE  1
   METHOD run()
   METHOD setUp()          VIRTUAL
   METHOD tearDown()       VIRTUAL

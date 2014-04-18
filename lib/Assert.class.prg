@@ -14,47 +14,75 @@
 #include "hbunit.ch"
 
 CLASS TAssert
-  METHOD fail()
-  METHOD assertEquals()
-  METHOD assertNotEquals()
-  METHOD assertTrue()
-  METHOD assertFalse()
-  METHOD assertNil()
-  METHOD assertNotNil()
-  //METHOD toStr()
-  //METHOD isEqual()
+  METHOD fail( cMsg )
+  METHOD assertEquals( xExp, xAct, cMsg )
+  METHOD assertNotEquals( xExp, xAct, cMsg )
+  METHOD assertTrue( xAct, cMsg )
+  METHOD assertFalse( xAct, cMsg )
+  METHOD assertNil( xAct, cMsg )
+  METHOD assertNotNil( xAct, cMsg )
+  METHOD assert( xExp, xAct, cMsg, lInvert )
 
 ENDCLASS
 
 METHOD fail( cMsg ) CLASS TAssert
-return ( ::assert( .f.,, "Failure: " + cMsg, "" ))
+  RETURN ( ::assert( .f.,, "Failure: " + cMsg ) )
 
 METHOD assertEquals( xExp, xAct, cMsg ) CLASS TAssert
-return ( ::assert( xExp, xAct, cMsg,;
-                 "Exp: " + ToStr( xExp, .t. ) + ", Act: " + ToStr( xAct, .t. )))
+  LOCAL cErrMsg := ""
+
+  cErrMsg += "Exp: " + ToStr( xExp, .t. )
+  cErrMsg += ", Act: " + ToStr( xAct, .t. )
+  cErrMsg += "( " + cMsg + " )"
+
+  RETURN ( ::assert( xExp, xAct, cErrMsg ) )
 
 METHOD assertNotEquals( xExp, xAct, cMsg ) CLASS TAssert
-return ( ::assert( xExp, xAct, cMsg,;
-                 "Exp: not " + ToStr( xExp, .t. ) + ", Act: " + ToStr( xAct ),;
-                 .t. ))
+  LOCAL cErrMsg := ""
+
+  cErrMsg += "Exp: not " + ToStr( xExp, .t. )
+  cErrMsg += ", Act: " + ToStr( xAct )
+  cErrMsg += "( " + cMsg + " )"
+
+  RETURN ( ::assert( xExp, xAct, cErrMsg, .t. ) )
 
 METHOD assertTrue( xAct, cMsg ) CLASS TAssert
-return ( ::assert( .t., xAct , cMsg, "Exp: .t., Act: " + ToStr( xAct, .t. )))
+  LOCAL cErrMsg := ""
+
+  cErrMsg += "Exp: .t., Act: "
+  cErrMsg += ToStr( xAct, .t. )
+  cErrMsg += "( " + cMsg + " )"
+
+  RETURN ( ::assert( .t., xAct , cErrMsg ) )
 
 METHOD assertFalse( xAct, cMsg ) CLASS TAssert
-return ( ::assert( .f., xAct , cMsg, "Exp: .f., Act: " + ToStr( xAct, .t. )))
+  LOCAL cErrMsg := ""
+
+  cErrMsg += "Exp: .f., Act: "
+  cErrMsg += ToStr( xAct, .t. )
+  cErrMsg += "( " + cMsg + " )"
+
+  RETURN ( ::assert( .f., xAct , cErrMsg ) )
 
 METHOD assertNil( xAct, cMsg ) CLASS TAssert
-return ( ::assert( nil, xAct , cMsg, "Exp: nil, Act: " + ToStr( xAct, .t. )))
+  LOCAL cErrMsg := ""
+
+  cErrMsg += "Exp: nil, Act: "
+  cErrMsg += ToStr( xAct, .t. )
+  cErrMsg += "( " + cMsg + " )"
+
+  RETURN ( ::assert( nil, xAct , cErrMsg ) )
 
 METHOD assertNotNil( xAct, cMsg ) CLASS TAssert
-return ( ::assert( nil, xAct , cMsg, "Exp: not nil, Act: " + ToStr( xAct, .t. ), .t. ))
+  LOCAL cErrMsg := ""
 
+  cErrMsg += "Exp: not nil, Act: "
+  cErrMsg += ToStr( xAct, .t. )
+  cErrMsg += "( " + cMsg + " )"
 
-//METHOD SetAssertResultObject( oResult )
-//return ( oResultObject := oResult )
+  RETURN ( ::assert( nil, xAct , cErrMsg, .t. ) )
 
-METHOD assert( xExp, xAct, cMsg, aArgs, lInvert ) CLASS TAssert
+METHOD assert( xExp, xAct, cMsg, lInvert ) CLASS TAssert
   LOCAL oError
   
   IF( lInvert == nil, lInvert := .f., )
@@ -64,7 +92,7 @@ METHOD assert( xExp, xAct, cMsg, aArgs, lInvert ) CLASS TAssert
     
     IF (( lInvert .and. IsEqual( xExp, xAct )) .or.;
         ( !( lInvert ) .and. ( !( IsEqual( xExp, xAct  )))))
-      ::oResult:AddFailure( ErrorNew( "EAssertFailure",,, cMsg, aArgs ))
+      ::oResult:AddFailure( xhb_ErrorNew( "EAssertFailure",,,, cMsg ) )
     ENDIF
 
   CATCH oError
@@ -84,7 +112,8 @@ FUNCTION isEqual( xExp, xAct)
   ENDCASE
 RETURN ( lResult )
 
-//METHOD toStr( xVal, lUseQuote ) CLASS TAssert
+// #TODO - see where to put these util methods
+
 FUNCTION toStr (xVal, lUseQuote )
   local cStr, i
   

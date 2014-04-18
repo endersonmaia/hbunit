@@ -13,16 +13,17 @@
 
 #include "hbclass.ch"
 
-class TTestTestSuite inherit TTestCase
-  method testAddTest()
-endclass
+CLASS TTestTestSuite inherit TTestCase
+  METHOD testAddTest()
+ENDCLASS
 
-method TestAddTest()
-  local oSuite := TTestSuite():New(),;
-        oCase := TTestCase():New()
-  
-  AssertEquals( 0, oSuite:CountTestCases(), "test CountTestCases() after creation" )
+METHOD testAddTest()
+  LOCAL oSuite	:= TTestSuite():New(),;
+  		oCase 	:= TTestCase():New(), a
+
+  ::assertEquals( 0, oSuite:countTestCases(), "test CountTestCases() after creation" )
+
   oSuite:AddTest( oCase )
-  AssertEquals( 1, oSuite:CountTestCases(), "test CountTestCases() after adding a testcase" )
-return ( nil )
+  ::assertEquals( 1, oSuite:CountTestCases(), "test CountTestCases() after adding a testcase" )
 
+  RETURN ( nil )

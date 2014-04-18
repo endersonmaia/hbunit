@@ -41,7 +41,7 @@ ENDCLASS
 METHOD run( oTest ) CLASS TTestResult
   LOCAL cMethod, i
   
-  setAssertResultObject( SELF )
+  //setAssertResultObject( SELF )
   ::getTestMethods( oTest )
   ::nTestCases += Len( ::aMethods )
 
@@ -50,6 +50,11 @@ METHOD run( oTest ) CLASS TTestResult
     ::invokeTestMethod( oTest, cMethod )
     ::invokeTestMethod( oTest, "TEARDOWN")
   NEXT
+
+  IF ( ::countFailures() > 0 .or. ::countErrors() > 0)
+    ErrorLevel ( 1 )
+  ENDIF
+
   RETURN ( NIL )
 
 METHOD GetTestMethods( oTest ) class TTestResult

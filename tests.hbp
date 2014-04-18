@@ -5,5 +5,5 @@ xhb.hbc
 -lhbunit
 -o./bin/
 ./tests/AllTestSuite.prg
-./tests/assertTest.prg
+./tests/testAssert.prg
 ./tests/testTestSuite.prg
