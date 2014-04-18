@@ -1,7 +1,6 @@
 -inc
 -incpath=include
--incpath=${hb_addons}/xhb
--lxhb
+xhb.hbc
 -hblib
 -ohbunit
 lib\TextRunner.class.prg
