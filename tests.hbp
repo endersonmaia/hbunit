@@ -3,6 +3,7 @@
 xhb.hbc
 -L./
 -lhbunit
+-static
 -o./bin/
 ./tests/AllTestSuite.prg
 ./tests/testAssert.prg
