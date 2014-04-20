@@ -84,12 +84,14 @@ METHOD assertNotNil( xAct, cMsg ) CLASS TAssert
 
 METHOD assert( xExp, xAct, cMsg, lInvert ) CLASS TAssert
   LOCAL oError
-  
+
+  cMsg := ProcName(2) + ":" + LTRIM(STR(ProcLine(2))) + " => " + cMsg
+
   IF( lInvert == nil, lInvert := .f., )
-  
+
   TRY
     ::oResult:IncrementAssertCount()
-    
+
     IF (( lInvert .and. IsEqual( xExp, xAct )) .or.;
         ( !( lInvert ) .and. ( !( IsEqual( xExp, xAct  )))))
       ::oResult:AddFailure( xhb_ErrorNew( "EAssertFailure",,,, cMsg ) )
