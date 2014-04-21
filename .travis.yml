@@ -1,14 +1,18 @@
 language: c
 compiler: gcc
 before_install:
- - sudo apt-get -qq update
- - sudo apt-get install -qq libncurses-dev
- - sudo apt-get install -qq libslang2-dev
- - sudo apt-get install -qq unzip
+  - sudo apt-get -qq update
+  - sudo apt-get install -qq libncurses-dev
+  - sudo apt-get install -qq libslang2-dev
+  - sudo apt-get install -qq libpcre3-dev 
+  - sudo apt-get install -qq zlib1g-dev 
+  - sudo apt-get install -qq unzip
 install: 
   - wget https://github.com/harbour/core/archive/master.zip -O /tmp/harbour-dev.zip
   - cd /tmp && unzip harbour-dev.zip && cd -
-  - cd /tmp/core-master && sudo HB_INSTALL_PREFIX=/usr/local HB_BUILD_3RDEXT=no HB_BUILD_CONTRIBS=xhb make install && cd -
+  - cd /tmp/core-master && HB_INSTALL_PREFIX=/usr/local HB_BUILD_3RDEXT=no HB_BUILD_CONTRIBS=xhb make install && cd -
+  - cd /tmp/core-master && sudo make install
+  - sudo ldconfig -f /usr/local/etc/ld.so.conf.d/harbour.conf
 script: 
   - hbmk2 ./lib.hbp
   - hbmk2 ./tests.hbp
