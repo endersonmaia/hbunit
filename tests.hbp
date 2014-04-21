@@ -3,7 +3,7 @@
 xhb.hbc
 -L./
 -lhbunit
--static
+-ldflag+=-lm
 -o./bin/
 ./tests/AllTestSuite.prg
 ./tests/testAssert.prg
