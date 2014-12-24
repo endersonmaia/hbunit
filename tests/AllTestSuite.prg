@@ -13,11 +13,12 @@
 
 FUNCTION main()
 
-  LOCAL oRunner := TTextRunner():New()
-  LOCAL oSuite := TTestSuite():New()
+  LOCAL oRunner := TTextRunner():new()
+  LOCAL oSuite := TTestSuite():new()
 
-  oSuite:AddTest( TTestAssert():New() )
-  oSuite:AddTest( TTestTestSuite():New() )
+  oSuite:AddTest( TTestAssert():new() )
+  oSuite:AddTest( TTestTestSuite():new() )
+  oSuite:AddTest( TTestMock():new() )
 
   oRunner:Run( oSuite )
 
