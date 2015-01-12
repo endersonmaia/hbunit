@@ -1,5 +1,4 @@
 -incpath=include
-xhb.hbc
 -hblib
 -ohbunit
 lib\TextRunner.class.prg

@@ -22,7 +22,7 @@ CLASS TTestAssert FROM TTestCase
 
 ENDCLASS
 
-METHOD testAssertErrors()
+METHOD testAssertErrors() CLASS TTestAssert
   TRY
     a := 1/0
     ::fail( "division by zero not caught" )
@@ -34,13 +34,13 @@ METHOD testAssertErrors()
   END
 RETURN ( nil )
 
-METHOD testLogicals()
+METHOD testLogicals() CLASS TTestAssert
 
   ::assertTrue( .t., "test AssertTrue with .t." )
   ::assertFalse( .f., "test AssertFalse with .f." )
   RETURN ( nil )
 
-METHOD testAssertEquals()
+METHOD testAssertEquals() CLASS TTestAssert
   // test with nil
   ::assertEquals( , nil, "test ::assertEquals nil with nil" )
   
@@ -65,7 +65,7 @@ METHOD testAssertEquals()
   // test for other types
 RETURN ( nil )
 
-METHOD testAssertNotEquals()
+METHOD testAssertNotEquals() CLASS TTestAssert
   ::assertNotEquals( 0, 1, "test ::assertNotEquals on small integers" )
   ::assertNotEquals( 1234567890, 1234567891, "test ::assertNotEquals on large integers" )
   ::assertNotEquals( -2, -3, "test ::assertNotEquals on small negative integers" )
@@ -74,12 +74,12 @@ METHOD testAssertNotEquals()
   // test for other types
 RETURN ( nil )
 
-METHOD testAssertNil()
+METHOD testAssertNil() CLASS TTestAssert
   ::assertNil( , "test ::assertNil with empty parameter" )
   ::assertNil( nil, "test ::assertNil with coded nil" )
 RETURN ( nil )
 
-METHOD testAssertNotNil()
+METHOD testAssertNotNil() CLASS TTestAssert
   ::assertNotNil( 1, "test ::assertNotNil on numerics" )
   ::assertNotNil( 'a', "test ::assertNotNil with character" )
   ::assertNotNil( date(), "test ::assertNotNil with date" )

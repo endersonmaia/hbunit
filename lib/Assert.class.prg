@@ -94,7 +94,7 @@ METHOD assert( xExp, xAct, cMsg, lInvert ) CLASS TAssert
 
     IF (( lInvert .and. IsEqual( xExp, xAct )) .or.;
         ( !( lInvert ) .and. ( !( IsEqual( xExp, xAct  )))))
-      ::oResult:AddFailure( xhb_ErrorNew( "EAssertFailure",,,, cMsg ) )
+      ::oResult:AddFailure( ErrorNew( "EAssertFailure",,,, cMsg ) )
     ENDIF
 
   CATCH oError
@@ -121,18 +121,27 @@ FUNCTION toStr (xVal, lUseQuote )
   
   if( lUseQuote == nil, lUseQuote := .f., )
   
-  switch ValType( xVal )
-    case "C";     cStr := xVal; exit
-    case "M";     cStr := xVal; exit
-    case "L";     cStr := if( xVal, ".t.", ".f." ); exit
-    case "D";     cStr := DToC( xVal ); exit
-    case "N";     cStr := LTrim( Str( xVal )); exit
-    case "A";     cStr := arrToStr( xVal ); exit
-    case "O";     cStr := "obj"; exit
-    case "B";     cStr := "blk"; exit
-    default;      cStr := "nil"
-  end
-
+  DO CASE
+  CASE ( ValType( xVal ) == "C" )
+      cStr := xVal
+  CASE ( ValType( xVal ) == "M" )
+      cStr := xVal
+  CASE ( ValType( xVal ) == "L" )
+   cStr := if( xVal, ".t.", ".f." )
+  CASE ( ValType( xVal ) ==  "D" )
+   cStr := DToC( xVal )
+  CASE ( ValType( xVal ) == "N" )
+   cStr := LTrim( Str( xVal ) )
+  CASE ( ValType( xVal ) == "A" )
+   cStr := arrToStr( xVal )
+  CASE ( ValType( xVal ) == "O" )
+   cStr := "obj"
+  CASE ( ValType( xVal ) == "B" )
+   cStr := "blk"
+  OTHERWISE
+   cStr := "nil"
+  END
+  
   if ( lUseQuote .and. ValType( xVal ) == "C" )
     cStr := "'" + cStr+ "'"
   endif

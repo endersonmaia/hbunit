@@ -1,5 +1,4 @@
 -incpath=./include
-xhb.hbc
 -L./
 -lhbunit
 -ldflag+=-lm
