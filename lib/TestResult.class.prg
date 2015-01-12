@@ -14,15 +14,15 @@
 #include "hbunit.ch"
 
 CLASS TTestResult
-  METHOD countErrors()              INLINE  Len( ::aErrors )
-  METHOD countFailures()            INLINE  Len( ::aFailures )
-  METHOD addError( oError )         INLINE  AAdd( ::aErrors, oError )
-  METHOD addFailure( oFailure )     INLINE  AAdd( ::aFailures, oFailure )
-  METHOD incrementAssertCount()     INLINE  ::nAssertCount ++
-  METHOD getErrors()                INLINE  ::aErrors
-  METHOD getFailures()              INLINE  ::aFailures
-  METHOD getTestCasesCount()        INLINE  ::nTestCases
-  METHOD getAssertCount()           INLINE  ::nAssertCount
+  METHOD countErrors()
+  METHOD countFailures()
+  METHOD addError( oError )
+  METHOD addFailure( oFailure )
+  METHOD incrementAssertCount()
+  METHOD getErrors()
+  METHOD getFailures()
+  METHOD getTestCasesCount()
+  METHOD getAssertCount()
   METHOD run()
   
   PROTECTED:
@@ -82,3 +82,30 @@ METHOD InvokeTestMethod( oTest, cMethod ) class TTestResult
     ::AddError( oError )
   END
   RETURN ( NIL )
+
+METHOD countErrors() CLASS TTestResult
+  RETURN ( Len( ::aErrors ) )
+
+METHOD countFailures() CLASS TTestResult
+  RETURN ( Len( ::aFailures ) )
+
+METHOD addError( oError ) CLASS TTestResult
+  RETURN ( AAdd( ::aErrors, oError ) )
+
+METHOD addFailure( oFailure ) CLASS TTestResult
+  RETURN ( AAdd( ::aFailures, oFailure ) )
+
+METHOD incrementAssertCount() CLASS TTestResult
+  RETURN ( ::nAssertCount++ )
+
+METHOD getErrors() CLASS TTestResult
+  RETURN ( ::aErrors )
+
+METHOD getFailures() CLASS TTestResult
+  RETURN ( ::aFailures )
+
+METHOD getTestCasesCount() CLASS TTestResult
+  RETURN ( ::nTestCases )
+
+METHOD getAssertCount() CLASS TTestResult
+  RETURN ( ::nAssertCount )

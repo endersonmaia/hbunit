@@ -29,3 +29,9 @@ METHOD run() CLASS TTestSuite
     ::aTests[i]:run()
   NEXT
 RETURN ( ::oResult )
+
+METHOD countTestCases()   CLASS TTestSuite
+  RETURN ( LEN( ::aTests ) )
+
+METHOD addTest( oTest )
+  RETURN ( AADD( ::aTests, oTest ) )
