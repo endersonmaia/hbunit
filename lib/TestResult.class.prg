@@ -39,15 +39,15 @@ CLASS TTestResult
 ENDCLASS
 
 METHOD run( oTest ) CLASS TTestResult
-  LOCAL cMethod, i
+  LOCAL i
   
   //setAssertResultObject( SELF )
   ::getTestMethods( oTest )
   ::nTestCases += Len( ::aMethods )
 
-  FOR each cMethod in ::aMethods
+  FOR i := 1 TO LEN( ::aMethods )
     ::invokeTestMethod( oTest, "SETUP")
-    ::invokeTestMethod( oTest, cMethod )
+    ::invokeTestMethod( oTest, ::aMethods[i] )
     ::invokeTestMethod( oTest, "TEARDOWN")
   NEXT
 
@@ -59,13 +59,13 @@ METHOD run( oTest ) CLASS TTestResult
 
 METHOD GetTestMethods( oTest ) class TTestResult
   LOCAL aMethods := __objGetMethodList( oTest ),;
-        cMethod
+        i
   
   ::aMethods := {}
   
-  FOR each cMethod in aMethods
-    IF ( left( cMethod, 4 ) == "TEST" )
-      AAdd( ::aMethods, cMethod )
+  FOR i := 1 TO LEN( aMethods )
+    IF ( LEFT( aMethods[i], 4 ) == "TEST" )
+      AAdd( ::aMethods, aMethods[i] )
     ENDIF
   NEXT
 
