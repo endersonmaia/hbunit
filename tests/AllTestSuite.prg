@@ -11,6 +11,8 @@
 // See COPYRIGHT for more details.
 //++
 
+#include "hbunit.ch"
+
 FUNCTION main()
 
   LOCAL oRunner := TTextRunner():new()

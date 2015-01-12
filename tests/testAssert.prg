@@ -11,8 +11,7 @@
 // See COPYRIGHT for more details.
 //++
 
-#include "xhb.ch"
-#include "hbclass.ch"
+#include "hbunit.ch"
 
 CLASS TTestAssert INHERIT TTestCase
   METHOD testLogicals()

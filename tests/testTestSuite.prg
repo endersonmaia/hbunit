@@ -11,7 +11,7 @@
 // See COPYRIGHT for more details.
 //++
 
-#include "hbclass.ch"
+#include "hbunit.ch"
 
 CLASS TTestTestSuite inherit TTestCase
   METHOD testAddTest()
