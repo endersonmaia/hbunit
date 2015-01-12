@@ -13,7 +13,7 @@
 
 #include "hbunit.ch"
 
-CLASS TTestMock INHERIT TTestCase
+CLASS TTestMock FROM TTestCase
 
   METHOD testMockConstruction()
   METHOD testInvalidCharacterMockConstrution()

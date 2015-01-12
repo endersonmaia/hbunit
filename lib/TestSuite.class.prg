@@ -13,7 +13,7 @@
 
 #include "hbunit.ch"
 
-CLASS TTestSuite INHERIT TTest
+CLASS TTestSuite FROM TTest
   METHOD run()
   METHOD countTestCases()  INLINE  LEN( ::aTests )
   METHOD addTest( oTest )  INLINE  AADD( ::aTests, oTest )

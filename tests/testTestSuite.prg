@@ -13,7 +13,7 @@
 
 #include "hbunit.ch"
 
-CLASS TTestTestSuite inherit TTestCase
+CLASS TTestTestSuite FROM TTestCase
   METHOD testAddTest()
 ENDCLASS
 

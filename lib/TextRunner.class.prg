@@ -13,7 +13,7 @@
 
 #include "hbunit.ch"
 
-CLASS TTextRunner inherit TTestRunner
+CLASS TTextRunner FROM TTestRunner
   METHOD showResults()
 ENDCLASS
 

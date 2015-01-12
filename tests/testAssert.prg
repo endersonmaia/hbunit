@@ -13,7 +13,7 @@
 
 #include "hbunit.ch"
 
-CLASS TTestAssert INHERIT TTestCase
+CLASS TTestAssert FROM TTestCase
   METHOD testLogicals()
   METHOD testAssertEquals()
   METHOD testAssertNotEquals()
