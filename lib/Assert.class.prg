@@ -23,6 +23,9 @@ CLASS TAssert
   METHOD assertNotNil( xAct, cMsg )
   METHOD assert( xExp, xAct, cMsg, lInvert )
 
+PROTECTED:
+  METHOD isEqual( xExp, xAct )
+
 ENDCLASS
 
 METHOD fail( cMsg ) CLASS TAssert
@@ -92,18 +95,18 @@ METHOD assert( xExp, xAct, cMsg, lInvert ) CLASS TAssert
   TRY
     ::oResult:IncrementAssertCount()
 
-    IF (( lInvert .and. IsEqual( xExp, xAct )) .or.;
-        ( !( lInvert ) .and. ( !( IsEqual( xExp, xAct  )))))
+    IF (( lInvert .and. ::isEqual( xExp, xAct )) .or.;
+        ( !( lInvert ) .and. ( !( ::isEqual( xExp, xAct  )))))
       ::oResult:AddFailure( ErrorNew( "EAssertFailure",,,, cMsg ) )
     ENDIF
 
   CATCH oError
     ::oResult:AddError( oError )
   END
-return ( nil )
+  
+  RETURN ( nil )
 
-//METHOD IsEqual( xExp, xAct ) CLASS TAssert
-FUNCTION isEqual( xExp, xAct)
+METHOD isEqual( xExp, xAct ) CLASS TAssert
   LOCAL lResult := .F.
   
   DO CASE

@@ -15,8 +15,8 @@
 
 CLASS TTestSuite FROM TTest
   METHOD run()
-  METHOD countTestCases()  INLINE  LEN( ::aTests )
-  METHOD addTest( oTest )  INLINE  AADD( ::aTests, oTest )
+  METHOD countTestCases()
+  METHOD addTest( oTest )
   
   PROTECTED:
     DATA aTests AS ARRAY INIT {}
@@ -30,8 +30,8 @@ METHOD run() CLASS TTestSuite
   NEXT
 RETURN ( ::oResult )
 
-METHOD countTestCases()   CLASS TTestSuite
+METHOD countTestCases() CLASS TTestSuite
   RETURN ( LEN( ::aTests ) )
 
-METHOD addTest( oTest )
+METHOD addTest( oTest ) CLASS TTestSuite
   RETURN ( AADD( ::aTests, oTest ) )

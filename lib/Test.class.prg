@@ -14,8 +14,8 @@
 #include "hbunit.ch"
 
 CLASS TTest
-  METHOD countTestCases()   virtual
-  METHOD run()              virtual
+  METHOD countTestCases()   VIRTUAL
+  METHOD run()              VIRTUAL
   
   PROTECTED:
     DATA  oResult INIT TTestResult():New()

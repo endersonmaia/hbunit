@@ -71,7 +71,7 @@ METHOD GetTestMethods( oTest ) class TTestResult
 
   RETURN ( NIL )
 
-METHOD InvokeTestMethod( oTest, cMethod ) class TTestResult
+METHOD invokeTestMethod( oTest, cMethod ) class TTestResult
   LOCAL oError
   
   TRY

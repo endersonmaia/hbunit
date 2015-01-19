@@ -11,17 +11,10 @@
 // See COPYRIGHT for more details.
 //++
 
-#include "hbunit.ch"
+#ifndef _HBUNIT_TOTVS_COMPAT_CH
+#define _HBUNIT_TOTVS_COMPAT_CH
 
-FUNCTION main()
+#xtranslate HIDDEN:     => PRIVATE:
+#xtranslate PROTECTED:  =>
 
-  LOCAL oRunner := TTextRunner():new()
-  LOCAL oSuite := TTestSuite():new()
-
-  oSuite:AddTest( TTestAssert():new() )
-  oSuite:AddTest( TTestTestSuite():new() )
-  oSuite:AddTest( TTestMock():new() )
-
-  oRunner:Run( oSuite )
-
-  RETURN ( nil )
+#endif // _HBUNIT_TOTVS_COMPAT_CH
