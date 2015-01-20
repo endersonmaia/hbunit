@@ -13,15 +13,17 @@
 
 #include "hbunit.ch"
 
-CLASS TTestCase FROM TAssert, TTest
+CLASS TTestCase FROM TTest
   METHOD run()
   METHOD setUp()          VIRTUAL
   METHOD tearDown()       VIRTUAL
-
+  
   PROTECTED:
-    DATA  oResult AS OBJECT INIT TTestResult():New()
+    DATA assert AS OBJECT
+
 ENDCLASS
 
 METHOD run() CLASS TTestCase
+  ::assert := TAssert():new( ::oResult )
   ::oResult:run ( SELF )
   RETURN ( ::oResult )

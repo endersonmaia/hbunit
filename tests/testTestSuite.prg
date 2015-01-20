@@ -18,12 +18,12 @@ CLASS TTestTestSuite FROM TTestCase
 ENDCLASS
 
 METHOD testAddTest()
-  LOCAL oSuite	:= TTestSuite():New(),;
-  		oCase 	:= TTestCase():New(), a
+  LOCAL oSuite	:= TTestSuite():new(),;
+  		  oCase 	:= TTestCase():new()
 
-  ::assertEquals( 0, oSuite:countTestCases(), "test CountTestCases() after creation" )
+  ::assert:equals( 0, oSuite:countTestCases(), "countTestCases() should be 0 after creation" )
 
-  oSuite:AddTest( oCase )
-  ::assertEquals( 1, oSuite:CountTestCases(), "test CountTestCases() after adding a testcase" )
+  oSuite:addTest( oCase )
+  ::assert:equals( 1, oSuite:countTestCases(), "countTestCases() should be 1 after adding one testcase" )
 
   RETURN ( nil )

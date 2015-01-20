@@ -50,7 +50,7 @@ METHOD showResults() CLASS TTextRunner
 
       FOR i := 1 to nFailures
         oFailure := aFailures[i]
-        OutErr( PADL( i, 4), oFailure:description, "" , hb_EOL() )
+        OutErr ( PADL( i, 4 ), oFailure:description, oFailure:operation, IF( !( Empty( oFailure:args )), toStr( oFailure:args ), "" ), hb_EOL() )
       NEXT
     ENDIF
   ENDIF

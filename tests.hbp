@@ -1,6 +1,8 @@
 -incpath=./include
 -L./
+-lxhb
 -lhbunit
+-ldflag+=-lm
 -o./bin/
 ./tests/AllTestSuite.prg
 ./tests/testAssert.prg

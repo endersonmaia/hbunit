@@ -14,7 +14,7 @@
 #ifndef _HBUNIT_TOTVS_COMPAT_CH
 #define _HBUNIT_TOTVS_COMPAT_CH
 
-#xtranslate HIDDEN:     => PRIVATE:
+#xtranslate HIDDEN:     =>
 #xtranslate PROTECTED:  =>
 
 #endif // _HBUNIT_TOTVS_COMPAT_CH

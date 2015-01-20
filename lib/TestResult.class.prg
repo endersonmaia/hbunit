@@ -41,7 +41,6 @@ ENDCLASS
 METHOD run( oTest ) CLASS TTestResult
   LOCAL i
   
-  //setAssertResultObject( SELF )
   ::getTestMethods( oTest )
   ::nTestCases += Len( ::aMethods )
 
@@ -79,7 +78,7 @@ METHOD invokeTestMethod( oTest, cMethod ) class TTestResult
     
   CATCH oError
     oError:Args := oTest:ClassName + ":" + cMethod
-    ::AddError( oError )
+    ::addError( oError )
   END
   RETURN ( NIL )
 

@@ -18,5 +18,5 @@ CLASS TTest
   METHOD run()              VIRTUAL
   
   PROTECTED:
-    DATA  oResult INIT TTestResult():New()
+    DATA oResult AS OBJECT INIT TTestResult():new()
 ENDCLASS

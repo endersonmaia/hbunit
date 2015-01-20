@@ -14,24 +14,31 @@
 #include "hbunit.ch"
 
 CLASS TAssert
-  METHOD fail( cMsg )
-  METHOD assertEquals( xExp, xAct, cMsg )
-  METHOD assertNotEquals( xExp, xAct, cMsg )
-  METHOD assertTrue( xAct, cMsg )
-  METHOD assertFalse( xAct, cMsg )
-  METHOD assertNil( xAct, cMsg )
-  METHOD assertNotNil( xAct, cMsg )
-  METHOD assert( xExp, xAct, cMsg, lInvert )
+
+  METHOD equals( xExp, xAct, cMsg )
+  METHOD notEquals( xExp, xAct, cMsg )
+  METHOD true( xAct, cMsg )
+  METHOD false( xAct, cMsg )
+  METHOD null( xAct, cMsg )
+  METHOD notNull( xAct, cMsg )
+  METHOD new( oResult )
+  DATA oResult AS OBJECT
 
 PROTECTED:
   METHOD isEqual( xExp, xAct )
+  METHOD assert( xExp, xAct, cMsg, lInvert )
+  METHOD fail( cMsg )
 
 ENDCLASS
+
+METHOD new( oResult ) CLASS TAssert
+  ::oResult := oResult
+  RETURN ( SELF )
 
 METHOD fail( cMsg ) CLASS TAssert
   RETURN ( ::assert( .f.,, "Failure: " + cMsg ) )
 
-METHOD assertEquals( xExp, xAct, cMsg ) CLASS TAssert
+METHOD equals( xExp, xAct, cMsg ) CLASS TAssert
   LOCAL cErrMsg := ""
 
   cErrMsg += "Exp: " + ToStr( xExp, .t. )
@@ -40,7 +47,7 @@ METHOD assertEquals( xExp, xAct, cMsg ) CLASS TAssert
 
   RETURN ( ::assert( xExp, xAct, cErrMsg ) )
 
-METHOD assertNotEquals( xExp, xAct, cMsg ) CLASS TAssert
+METHOD notEquals( xExp, xAct, cMsg ) CLASS TAssert
   LOCAL cErrMsg := ""
 
   cErrMsg += "Exp: not " + ToStr( xExp, .t. )
@@ -49,7 +56,7 @@ METHOD assertNotEquals( xExp, xAct, cMsg ) CLASS TAssert
 
   RETURN ( ::assert( xExp, xAct, cErrMsg, .t. ) )
 
-METHOD assertTrue( xAct, cMsg ) CLASS TAssert
+METHOD true( xAct, cMsg ) CLASS TAssert
   LOCAL cErrMsg := ""
 
   cErrMsg += "Exp: .t., Act: "
@@ -58,7 +65,7 @@ METHOD assertTrue( xAct, cMsg ) CLASS TAssert
 
   RETURN ( ::assert( .t., xAct , cErrMsg ) )
 
-METHOD assertFalse( xAct, cMsg ) CLASS TAssert
+METHOD false( xAct, cMsg ) CLASS TAssert
   LOCAL cErrMsg := ""
 
   cErrMsg += "Exp: .f., Act: "
@@ -67,7 +74,7 @@ METHOD assertFalse( xAct, cMsg ) CLASS TAssert
 
   RETURN ( ::assert( .f., xAct , cErrMsg ) )
 
-METHOD assertNil( xAct, cMsg ) CLASS TAssert
+METHOD null( xAct, cMsg ) CLASS TAssert
   LOCAL cErrMsg := ""
 
   cErrMsg += "Exp: nil, Act: "
@@ -76,7 +83,7 @@ METHOD assertNil( xAct, cMsg ) CLASS TAssert
 
   RETURN ( ::assert( nil, xAct , cErrMsg ) )
 
-METHOD assertNotNil( xAct, cMsg ) CLASS TAssert
+METHOD notNull( xAct, cMsg ) CLASS TAssert
   LOCAL cErrMsg := ""
 
   cErrMsg += "Exp: not nil, Act: "
@@ -88,20 +95,26 @@ METHOD assertNotNil( xAct, cMsg ) CLASS TAssert
 METHOD assert( xExp, xAct, cMsg, lInvert ) CLASS TAssert
   LOCAL oError
 
-  cMsg := ProcName(2) + ":" + LTRIM(STR(ProcLine(2))) + " => " + cMsg
+  cMsg := Procfile(2) + ":" + LTRIM(STR(ProcLine(2))) + ":" + ProcName(2) + " => " + cMsg
 
   IF( lInvert == nil, lInvert := .f., )
 
   TRY
-    ::oResult:IncrementAssertCount()
+    ::oResult:incrementAssertCount()
 
-    IF (( lInvert .and. ::isEqual( xExp, xAct )) .or.;
+    IF ( ( lInvert .and. ::isEqual( xExp, xAct )) .or.;
         ( !( lInvert ) .and. ( !( ::isEqual( xExp, xAct  )))))
-      ::oResult:AddFailure( ErrorNew( "EAssertFailure",,,, cMsg ) )
+
+      oError := ErrorNew()
+      oError:description  := cMsg
+      oError:filename     := Procfile(2)
+      
+      ::oResult:addFailure( oError )
+  
     ENDIF
 
   CATCH oError
-    ::oResult:AddError( oError )
+    ::oResult:addError( oError )
   END
   
   RETURN ( nil )
