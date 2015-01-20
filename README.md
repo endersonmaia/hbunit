@@ -1,4 +1,4 @@
-# [ALPHA] hbunit [![Build Status](https://travis-ci.org/enderson/hbunit.svg)](https://travis-ci.org/enderson/hbunit)
+# [ALPHA] hbunit [![Build Status](https://travis-ci.org/endersonmaia/hbunit.svg)](https://travis-ci.org/endersonmaia/hbunit)
 
 hbunit is a unit-testing framework for the Harbour language.
 
