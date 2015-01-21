@@ -4,15 +4,15 @@ before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -qq libncurses-dev
   - sudo apt-get install -qq libslang2-dev
-  - sudo apt-get install -qq libpcre3-dev 
-  - sudo apt-get install -qq zlib1g-dev 
+  - sudo apt-get install -qq libpcre3-dev
+  - sudo apt-get install -qq zlib1g-dev
   - sudo apt-get install -qq unzip
-install: 
+install:
   - wget https://downloads.sourceforge.net/harbour-project/source/3.0.0/harbour-3.0.0.tar.bz2 -O /tmp/harbour-3.0.0.tar.bz2
   - cd /tmp && tar -xvjf harbour-3.0.0.tar.bz2 && cd -
   - cd /tmp/harbour-3.0.0 && HB_INSTALL_PREFIX=/usr/local HB_BUILD_3RDEXT=no HB_BUILD_CONTRIBS=xhb make && cd -
   - cd /tmp/harbour-3.0.0 && sudo make install && cd -
   - sudo ldconfig -f /usr/local/etc/ld.so.conf.d/harbour.conf
-script: 
-  - hbmk2 ./lib.hbp
-  - hbmk2 -run ./tests.hbp
+script:
+  - make
+  - make test
