@@ -73,13 +73,13 @@ METHOD GetTestMethods( oTest ) class TTestResult
 METHOD invokeTestMethod( oTest, cMethod ) class TTestResult
   LOCAL oError
   
-  TRY
+  TRY EXCEPTION
     __ObjSendMsg( oTest, cMethod )         // invoke the METHOD
     
-  CATCH oError
+  CATCH EXCEPTION oError
     oError:Args := oTest:ClassName + ":" + cMethod
     ::addError( oError )
-  END
+  END TRY
   RETURN ( NIL )
 
 METHOD countErrors() CLASS TTestResult

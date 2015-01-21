@@ -14,6 +14,8 @@
 #ifndef _HBUNIT_TOTVS_COMPAT_CH
 #define _HBUNIT_TOTVS_COMPAT_CH
 
+#include "tryexception.ch"
+
 #xtranslate HIDDEN:     =>
 #xtranslate PROTECTED:  =>
 

@@ -99,7 +99,7 @@ METHOD assert( xExp, xAct, cMsg, lInvert ) CLASS TAssert
 
   IF( lInvert == nil, lInvert := .f., )
 
-  TRY
+  TRY EXCEPTION
     ::oResult:incrementAssertCount()
 
     IF ( ( lInvert .and. ::isEqual( xExp, xAct )) .or.;
@@ -108,20 +108,20 @@ METHOD assert( xExp, xAct, cMsg, lInvert ) CLASS TAssert
       oError := ErrorNew()
       oError:description  := cMsg
       oError:filename     := Procfile(2)
-      
+
       ::oResult:addFailure( oError )
-  
+
     ENDIF
 
-  CATCH oError
+  CATCH EXCEPTION oError
     ::oResult:addError( oError )
-  END
-  
+  END TRY
+
   RETURN ( nil )
 
 METHOD isEqual( xExp, xAct ) CLASS TAssert
   LOCAL lResult := .F.
-  
+
   DO CASE
     CASE ValType( xExp ) != ValType( xAct )
     CASE ( !( xExp == xAct ))
@@ -134,9 +134,9 @@ RETURN ( lResult )
 
 FUNCTION toStr (xVal, lUseQuote )
   local cStr, i
-  
+
   if( lUseQuote == nil, lUseQuote := .f., )
-  
+
   DO CASE
   CASE ( ValType( xVal ) == "C" )
       cStr := xVal
@@ -157,10 +157,10 @@ FUNCTION toStr (xVal, lUseQuote )
   OTHERWISE
    cStr := "nil"
   END
-  
-  if ( lUseQuote .and. ValType( xVal ) == "C" )
+
+  IF ( lUseQuote .and. ValType( xVal ) == "C" )
     cStr := "'" + cStr+ "'"
-  endif
+  ENDIF
 
   RETURN ( cStr )
 

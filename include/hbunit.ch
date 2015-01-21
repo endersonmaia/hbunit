@@ -16,25 +16,25 @@
 
 #ifdef __HARBOUR__
   #include "hbclass.ch"
+
+  #XTRANSLATE TRY             => TRYEXCEPTION
+  #XTRANSLATE TRY EXCEPTION   => TRYEXCEPTION
+  #XTRANSLATE CATCH           => CATCHEXCEPTION
+  #XTRANSLATE CATCH EXCEPTION => CATCHEXCEPTION
+
+  #xcommand TRYEXCEPTION       => bError := errorBlock( {|oErr| break( oErr ) } ) ;;
+                                  BEGIN SEQUENCE
+  #xcommand CATCHEXCEPTION [<!oErr!>]  => errorBlock( bError ) ;;
+                                          RECOVER [USING <oErr>] <-oErr-> ;;
+                                          errorBlock( bError )
+
 #else
+  #include "hbunit_totvs_compat.ch"
   #ifdef TOTVS
     #include "totvs.ch"
-    #include "hbunit_totvs_compat.ch"
   #else
     #include "protheus.ch"
-    #include "hbunit_totvs_compat.ch"
   #endif    
 #endif
-
-#XTRANSLATE TRY             => TRYEXCEPTION
-#XTRANSLATE TRY EXCEPTION   => TRYEXCEPTION
-#XTRANSLATE CATCH           => CATCHEXCEPTION
-#XTRANSLATE CATCH EXCEPTION => CATCHEXCEPTION
-
-#xcommand TRYEXCEPTION       => bError := errorBlock( {|oErr| break( oErr ) } ) ;;
-                                BEGIN SEQUENCE
-#xcommand CATCHEXCEPTION [<!oErr!>]  => errorBlock( bError ) ;;
-                                        RECOVER [USING <oErr>] <-oErr-> ;;
-                                        errorBlock( bError )
 
 #endif // _HBUNIT_CH
