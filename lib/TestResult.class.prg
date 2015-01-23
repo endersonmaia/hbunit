@@ -14,6 +14,10 @@
 #include "hbunit.ch"
 
 CLASS TTestResult
+  METHOD new() CONSTRUCTOR
+  METHOD ClassName()
+  DATA cClassName
+
   METHOD countErrors()
   METHOD countFailures()
   METHOD addError( oError )
@@ -26,17 +30,26 @@ CLASS TTestResult
   METHOD run()
   
   PROTECTED:
-    CLASSDATA aErrors       AS ARRAY    INIT {}
-    CLASSDATA aFailures     AS ARRAY    INIT {}
-    CLASSDATA nTestCases    AS NUMERIC  INIT 0
-    CLASSDATA nAssertCount  AS NUMERIC  INIT 0
+    CLASSDATA aErrors       INIT {}
+    CLASSDATA aFailures     INIT {}
+    CLASSDATA nTestCases    INIT 0
+    CLASSDATA nAssertCount  INIT 0
     
   HIDDEN:
     METHOD invokeTestMethod()
     METHOD getTestMethods()
 
-    DATA aMethods as array init {}
+    DATA aMethods
 ENDCLASS
+
+METHOD new() CLASS TTestResult
+  ::aMethods := {}
+  ::cClassName := "TTestResult"
+  RETURN( SELF )
+
+METHOD ClassName() CLASS TTestResult
+  RETURN ( ::cClassName )
+
 
 METHOD run( oTest ) CLASS TTestResult
   LOCAL i

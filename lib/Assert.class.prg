@@ -15,25 +15,34 @@
 
 CLASS TAssert
 
+  METHOD new( oResult ) CONSTRUCTOR
+  METHOD ClassName()
+  DATA cClassName
+
   METHOD equals( xExp, xAct, cMsg )
   METHOD notEquals( xExp, xAct, cMsg )
   METHOD true( xAct, cMsg )
   METHOD false( xAct, cMsg )
   METHOD null( xAct, cMsg )
   METHOD notNull( xAct, cMsg )
-  METHOD new( oResult )
-  DATA oResult AS OBJECT
+  DATA oResult
 
 PROTECTED:
   METHOD isEqual( xExp, xAct )
   METHOD assert( xExp, xAct, cMsg, lInvert )
   METHOD fail( cMsg )
+  METHOD arrToStr( aArr )
+  METHOD toStr (xVal, lUseQuote )
 
 ENDCLASS
 
 METHOD new( oResult ) CLASS TAssert
   ::oResult := oResult
+  ::cClassName := "TAssert"
   RETURN ( SELF )
+ 
+METHOD ClassName() CLASS TAssert
+  RETURN ( ::cClassName )
 
 METHOD fail( cMsg ) CLASS TAssert
   RETURN ( ::assert( .f.,, "Failure: " + cMsg ) )
@@ -41,8 +50,8 @@ METHOD fail( cMsg ) CLASS TAssert
 METHOD equals( xExp, xAct, cMsg ) CLASS TAssert
   LOCAL cErrMsg := ""
 
-  cErrMsg += "Exp: " + ToStr( xExp, .t. )
-  cErrMsg += ", Act: " + ToStr( xAct, .t. )
+  cErrMsg += "Exp: " + ::toStr( xExp, .t. )
+  cErrMsg += ", Act: " + ::toStr( xAct, .t. )
   cErrMsg += "( " + cMsg + " )"
 
   RETURN ( ::assert( xExp, xAct, cErrMsg ) )
@@ -50,8 +59,8 @@ METHOD equals( xExp, xAct, cMsg ) CLASS TAssert
 METHOD notEquals( xExp, xAct, cMsg ) CLASS TAssert
   LOCAL cErrMsg := ""
 
-  cErrMsg += "Exp: not " + ToStr( xExp, .t. )
-  cErrMsg += ", Act: " + ToStr( xAct )
+  cErrMsg += "Exp: not " + ::toStr( xExp, .t. )
+  cErrMsg += ", Act: " + ::toStr( xAct )
   cErrMsg += "( " + cMsg + " )"
 
   RETURN ( ::assert( xExp, xAct, cErrMsg, .t. ) )
@@ -60,7 +69,7 @@ METHOD true( xAct, cMsg ) CLASS TAssert
   LOCAL cErrMsg := ""
 
   cErrMsg += "Exp: .t., Act: "
-  cErrMsg += ToStr( xAct, .t. )
+  cErrMsg += ::toStr( xAct, .t. )
   cErrMsg += "( " + cMsg + " )"
 
   RETURN ( ::assert( .t., xAct , cErrMsg ) )
@@ -69,7 +78,7 @@ METHOD false( xAct, cMsg ) CLASS TAssert
   LOCAL cErrMsg := ""
 
   cErrMsg += "Exp: .f., Act: "
-  cErrMsg += ToStr( xAct, .t. )
+  cErrMsg += ::toStr( xAct, .t. )
   cErrMsg += "( " + cMsg + " )"
 
   RETURN ( ::assert( .f., xAct , cErrMsg ) )
@@ -78,7 +87,7 @@ METHOD null( xAct, cMsg ) CLASS TAssert
   LOCAL cErrMsg := ""
 
   cErrMsg += "Exp: nil, Act: "
-  cErrMsg += ToStr( xAct, .t. )
+  cErrMsg += ::toStr( xAct, .t. )
   cErrMsg += "( " + cMsg + " )"
 
   RETURN ( ::assert( nil, xAct , cErrMsg ) )
@@ -87,7 +96,7 @@ METHOD notNull( xAct, cMsg ) CLASS TAssert
   LOCAL cErrMsg := ""
 
   cErrMsg += "Exp: not nil, Act: "
-  cErrMsg += ToStr( xAct, .t. )
+  cErrMsg += ::toStr( xAct, .t. )
   cErrMsg += "( " + cMsg + " )"
 
   RETURN ( ::assert( nil, xAct , cErrMsg, .t. ) )
@@ -132,7 +141,7 @@ RETURN ( lResult )
 
 // #TODO - see where to put these util methods
 
-FUNCTION toStr (xVal, lUseQuote )
+METHOD toStr (xVal, lUseQuote ) CLASS TAssert
   local cStr, i
 
   if( lUseQuote == nil, lUseQuote := .f., )
@@ -149,7 +158,7 @@ FUNCTION toStr (xVal, lUseQuote )
   CASE ( ValType( xVal ) == "N" )
    cStr := LTrim( Str( xVal ) )
   CASE ( ValType( xVal ) == "A" )
-   cStr := arrToStr( xVal )
+   cStr := ::arrToStr( xVal )
   CASE ( ValType( xVal ) == "O" )
    cStr := "obj"
   CASE ( ValType( xVal ) == "B" )
@@ -164,14 +173,14 @@ FUNCTION toStr (xVal, lUseQuote )
 
   RETURN ( cStr )
 
-FUNCTION arrToStr( aArr )
+METHOD arrToStr( aArr ) CLASS TAssert
   LOCAL cStr := "", nArrLen := 0, i
 
   nArrLen = LEN( aArr )
 
   cStr += " ARRAY => { "
   FOR i := 1 TO nArrLen
-    cStr += toStr( aArr[i] )
+    cStr += ::toStr( aArr[i] )
     IIF( i < nArrLen , cStr += "," , )
   NEXT
   cStr += " }"

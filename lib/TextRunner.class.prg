@@ -14,8 +14,20 @@
 #include "hbunit.ch"
 
 CLASS TTextRunner FROM TTestRunner
+  METHOD new() CONSTRUCTOR
+  METHOD ClassName()
+  DATA cClassName
+
   METHOD showResults()
 ENDCLASS
+
+METHOD new() CLASS TTextRunner
+  _Super:new()
+  ::cClassName := "TTextRunner"
+  RETURN ( SELF )
+
+METHOD ClassName() CLASS TTextRunner
+  RETURN ( ::cClassName )
 
 METHOD showResults() CLASS TTextRunner
   LOCAL aErrors := ::oResult:getErrors(),;
@@ -27,30 +39,29 @@ METHOD showResults() CLASS TTextRunner
         oError, oFailure,;
         i
 
-  OutStd( hb_EOL() )
-  OutStd( "Testcases: ", LTRIM( STR( nTestCases ) ), hb_EOL() )
-  OutStd( "Asserts:   ", LTRIM( STR( nAsserts   ) ), hb_EOL() )
-  OutStd( "Errors:    ", LTRIM( STR( nErrors    ) ), hb_EOL() )
-  OutStd( "Failures:  ", LTRIM( STR( nFailures  ) ), hb_EOL() )
+  ? "Testcases: ", LTRIM( STR( nTestCases ) )
+  ? "Asserts:   ", LTRIM( STR( nAsserts   ) )
+  ? "Errors:    ", LTRIM( STR( nErrors    ) )
+  ? "Failures:  ", LTRIM( STR( nFailures  ) )
 
   IF( nErrors + nFailures == 0 )
-    OutStd( hb_EOL(), "Ok." )
+    ? CRLF, "Ok."
   ELSE
     IF( nErrors > 0 )
-      OutStd( hb_EOL(), "Errors:", hb_EOL() ) 
+      ? CRLF, "Errors:", CRLF
 
       FOR i := 1 to nErrors
         oError := aErrors[i]
-        OutErr ( PADL( i, 4 ), oError:description, oError:operation, IF( !( Empty( oError:args )), toStr( oError:args ), "" ), hb_EOL() )
+        ? PADL( i, 4 ), oError:description, oError:operation, IF( !( Empty( oError:args )), ::toStr( oError:args ), "" )
       NEXT
     ENDIF
 
     IF( nFailures > 0 )    
-      OutStd( hb_EOL(), "Failures:", hb_EOL() ) 
+      ? CRLF, "Failures:", CRLF
 
       FOR i := 1 to nFailures
         oFailure := aFailures[i]
-        OutErr ( PADL( i, 4 ), oFailure:description, oFailure:operation, IF( !( Empty( oFailure:args )), toStr( oFailure:args ), "" ), hb_EOL() )
+        ? PADL( i, 4 ), oFailure:description, oFailure:operation, IF( !( Empty( oFailure:args )), ::toStr( oFailure:args ), "" )
       NEXT
     ENDIF
   ENDIF

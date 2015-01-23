@@ -14,9 +14,21 @@
 #include "hbunit.ch"
 
 CLASS TTest
+  METHOD new() CONSTRUCTOR
+  METHOD ClassName()
+  DATA cClassName
+
   METHOD countTestCases()   VIRTUAL
   METHOD run()              VIRTUAL
   
   PROTECTED:
-    DATA oResult AS OBJECT INIT TTestResult():new()
+    DATA oResult
 ENDCLASS
+
+METHOD new() CLASS TTest
+  ::cClassName := "TTest"
+  ::oResult := TTestResult():new()
+  RETURN ( SELF )
+
+METHOD ClassName() CLASS TTest
+  RETURN( ::cClassName )

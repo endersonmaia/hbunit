@@ -7,4 +7,3 @@
 ./tests/AllTestSuite.prg
 ./tests/testAssert.prg
 ./tests/testTestSuite.prg
-./tests/testMock.prg

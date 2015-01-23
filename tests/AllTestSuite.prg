@@ -13,14 +13,13 @@
 
 #include "hbunit.ch"
 
-FUNCTION main()
+USER FUNCTION hbunit_test()
 
   LOCAL oRunner := TTextRunner():new()
   LOCAL oSuite := TTestSuite():new()
 
   oSuite:AddTest( TTestAssert():new() )
   oSuite:AddTest( TTestTestSuite():new() )
-  oSuite:AddTest( TTestMock():new() )
 
   oRunner:Run( oSuite )
 

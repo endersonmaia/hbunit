@@ -8,4 +8,3 @@ lib\TestCase.class.prg
 lib\TestResult.class.prg
 lib\TestRunner.class.prg
 lib\TestSuite.class.prg
-lib\Mock.class.prg
