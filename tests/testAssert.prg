@@ -14,24 +14,38 @@
 #include "hbunit.ch"
 
 CLASS TTestAssert FROM TTestCase
+
+  METHOD new() CONSTRUCTOR
+  METHOD ClassName()
+  DATA cClassName
+
+  METHOD testAssertErrors()
   METHOD testLogicals()
-  METHOD testAssertEquals()
-  METHOD testAssertNotEquals()
-  METHOD testAssertNil()
-  METHOD testAssertNotNil()
+  METHOD testAE()
+  METHOD testANE()
+  METHOD testAN()
+  METHOD testANN()
 
 ENDCLASS
 
+METHOD new() CLASS TTestAssert
+  _Super:new()
+  ::cClassName := "TTestAssert"
+  RETURN( SELF )
+ 
+ METHOD ClassName() CLASS TTestAssert
+   RETURN ( ::cClassName )
+
 METHOD testAssertErrors() CLASS TTestAssert
-  TRY
+  TRY EXCEPTION
     a := 1/0
     ::fail( "division by zero not caught" )
-  END
+  END TRY
 
-  TRY
+  TRY EXCEPTION
     ::assert( a, "test variable not found" )
     ::fail( "unable to catch 'Variable not found'" )
-  END
+  END TRY
   
   RETURN ( nil )
 
@@ -41,7 +55,7 @@ METHOD testLogicals() CLASS TTestAssert
   ::assert:false( .f., "test ::assert:false with .f." )
   RETURN ( nil )
 
-METHOD testAssertEquals() CLASS TTestAssert
+METHOD testAE() CLASS TTestAssert
   // test with nil
   ::assert:equals( , nil, "test ::assert:equals nil with nil" )
   
@@ -66,7 +80,7 @@ METHOD testAssertEquals() CLASS TTestAssert
   // test for other types
   RETURN ( nil )
 
-METHOD testAssertNotEquals() CLASS TTestAssert
+METHOD testANE() CLASS TTestAssert
   ::assert:notEquals( 0, 1, "test ::assert:notEquals on small integers" )
   ::assert:notEquals( 1234567890, 1234567891, "test ::assert:notEquals on large integers" )
   ::assert:notEquals( -2, -3, "test ::assert:notEquals on small negative integers" )
@@ -75,12 +89,12 @@ METHOD testAssertNotEquals() CLASS TTestAssert
   // test for other types
   RETURN ( nil )
 
-METHOD testAssertNil() CLASS TTestAssert
+METHOD testAN() CLASS TTestAssert
   ::assert:null( , "test ::assert:notNull with empty parameter" )
   ::assert:null( nil, "test ::assert:notNull with coded nil" )
   RETURN ( nil )
 
-METHOD testAssertNotNil() CLASS TTestAssert
+METHOD testANN() CLASS TTestAssert
   ::assert:notNull( 1, "test ::assert:notNull on numerics" )
   ::assert:notNull( 'a', "test ::assert:notNull with character" )
   ::assert:notNull( date(), "test ::assert:notNull with date" )

@@ -14,14 +14,26 @@
 #include "hbunit.ch"
 
 CLASS TTestCase FROM TTest
+  METHOD new() CONSTRUCTOR
+  METHOD ClassName()
+  DATA cClassName
+
   METHOD run()
   METHOD setUp()          VIRTUAL
   METHOD tearDown()       VIRTUAL
   
   PROTECTED:
-    DATA assert AS OBJECT
+    DATA assert
 
 ENDCLASS
+
+METHOD new() CLASS TTestCase
+	_Super:new()
+  ::cClassName := "TTestCase"
+	RETURN ( SELF )
+
+METHOD ClassName() CLASS TTestCase
+  RETURN( ::cClassName )
 
 METHOD run() CLASS TTestCase
   ::assert := TAssert():new( ::oResult )

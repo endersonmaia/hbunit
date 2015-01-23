@@ -16,6 +16,9 @@
 
 #include "tryexception.ch"
 
+#xcommand ?  [<list,...>] => ConOut( [ <list> ] )
+#xcommand ?? [<list,...>] => ConOut( [ <list> ] )
+
 #xtranslate HIDDEN:     =>
 #xtranslate PROTECTED:  =>
 

@@ -14,13 +14,26 @@
 #include "hbunit.ch"
 
 CLASS TTestSuite FROM TTest
+  METHOD new() CONSTRUCTOR
+  METHOD className()
+  DATA cClassName
+
   METHOD run()
   METHOD countTestCases()
   METHOD addTest( oTest )
   
   PROTECTED:
-    DATA aTests AS ARRAY INIT {}
+    DATA aTests
 ENDCLASS
+
+METHOD new() CLASS TTestSuite
+  _Super:new()
+  ::cClassName := "TTestSuite"
+  ::aTests := {}
+  RETURN ( SELF )
+ 
+METHOD className() CLASS TTestSuite
+  RETURN( ::cClassName )
 
 METHOD run() CLASS TTestSuite
   LOCAL i

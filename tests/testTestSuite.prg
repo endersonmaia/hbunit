@@ -14,10 +14,16 @@
 #include "hbunit.ch"
 
 CLASS TTestTestSuite FROM TTestCase
+  METHOD new() CONSTRUCTOR
+
   METHOD testAddTest()
 ENDCLASS
 
-METHOD testAddTest()
+METHOD new() CLASS TTestTestSuite
+  _Super:new()
+  RETURN ( SELF )
+
+METHOD testAddTest() CLASS TTestTestSuite
   LOCAL oSuite	:= TTestSuite():new(),;
   		  oCase 	:= TTestCase():new()
 
