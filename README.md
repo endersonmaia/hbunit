@@ -8,18 +8,26 @@ This is a initial work on porting the jUnit Java unit-testing framework to the H
 
 Considering you have Habour (http://harbour.github.io) installed, you can run the following commands to try hbunit.
 
-To build the library, run this: 
+To build the library and run the tests: 
 
-````
-$> hbmk2 lib.hbp
-````
+    $> make
+    $> make test
+    Testcases:  7
+    Asserts:    29
+    Errors:     0
+    Failures:   0
+    
+    Ok.
 
-To run the tests, run this:
+# Contributting
 
-````
-$> hbmk2 tests.hbp
-$> ./bin/AllTestSuite
-````
+If you wanna contribute to the project, follow this steps:
+
+* Fork this repository;
+* Create a branch to work on a feature/bug;
+* Open a Pull Request from your branch;
+
+See https://guides.github.com/introduction/flow/index.html for more details on this workflow.
 
 # Copyright
 
