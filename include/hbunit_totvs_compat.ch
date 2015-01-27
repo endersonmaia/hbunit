@@ -19,6 +19,16 @@
 #xcommand ?  [<list,...>] => ConOut( [ <list> ] )
 #xcommand ?? [<list,...>] => ConOut( [ <list> ] )
 
+
+// BEGIN __objGetMethodList
+#xtranslate __objGetMethodList( <OBJECT> ) => __ADVPL__objGetMethodlist( <OBJECT> )
+
+STATIC FUNCTION __ADVPL__objGetMethodlist( OBJECT )
+  LOCAL aAux := ClassMethArr( OBJECT ), aMethods := {}
+  FOR i := 1 TO LEN( aAux ); AAdd( aMethods, aAux[i][1] ); NEXT
+RETURN ( aMethods )
+// END __objGetMethodList
+
 #xtranslate HIDDEN:     =>
 #xtranslate PROTECTED:  =>
 
