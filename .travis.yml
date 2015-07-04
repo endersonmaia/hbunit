@@ -16,3 +16,10 @@ install:
 script:
   - make
   - make test
+deploy:
+  provider: releases
+  api_key: "dd4719ca5c85b02c1b8d1dd100eccae8e0e1ec6b"
+  file: "libhbunit.so"
+  skip_cleanup: true
+  on:
+    tags: true
