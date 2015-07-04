@@ -14,6 +14,8 @@
 #ifndef _HBUNIT_CH
 #define _HBUNIT_CH
 
+#define _HBUNIT_VERSION 0.0.3-alpha
+
 #ifdef __HARBOUR__
   #include "hbclass.ch"
 
@@ -34,7 +36,7 @@
     #include "totvs.ch"
   #else
     #include "protheus.ch"
-  #endif    
+  #endif
 #endif
 
 #endif // _HBUNIT_CH
