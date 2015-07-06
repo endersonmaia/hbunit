@@ -40,7 +40,7 @@ METHOD new( oResult ) CLASS TAssert
   ::oResult := oResult
   ::cClassName := "TAssert"
   RETURN ( SELF )
- 
+
 METHOD ClassName() CLASS TAssert
   RETURN ( ::cClassName )
 
@@ -109,7 +109,7 @@ METHOD assert( xExp, xAct, cMsg, lInvert ) CLASS TAssert
   IF( lInvert == nil, lInvert := .f., )
 
   TRY EXCEPTION
-    ::oResult:incrementAssertCount()
+    ::oResult:oData:incrementAssertCount()
 
     IF ( ( lInvert .and. ::isEqual( xExp, xAct )) .or.;
         ( !( lInvert ) .and. ( !( ::isEqual( xExp, xAct  )))))
@@ -118,12 +118,12 @@ METHOD assert( xExp, xAct, cMsg, lInvert ) CLASS TAssert
       oError:description  := cMsg
       oError:filename     := Procfile(2)
 
-      ::oResult:addFailure( oError )
+      ::oResult:oData:addFailure( oError )
 
     ENDIF
 
   CATCH EXCEPTION oError
-    ::oResult:addError( oError )
+    ::oResult:oData:addError( oError )
   END TRY
 
   RETURN ( nil )

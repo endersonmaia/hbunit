@@ -21,7 +21,7 @@ CLASS TTestCase FROM TTest
   METHOD run()
   METHOD setUp()          VIRTUAL
   METHOD tearDown()       VIRTUAL
-  
+
   PROTECTED:
     DATA assert
 
@@ -36,6 +36,6 @@ METHOD ClassName() CLASS TTestCase
   RETURN( ::cClassName )
 
 METHOD run() CLASS TTestCase
-  ::assert := TAssert():new( ::oResult )
+  ::assert := TAssert():new( @::oResult )
   ::oResult:run ( SELF )
   RETURN ( ::oResult )

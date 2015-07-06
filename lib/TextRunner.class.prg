@@ -18,7 +18,7 @@ CLASS TTextRunner FROM TTestRunner
   METHOD ClassName()
   DATA cClassName
 
-  METHOD showResults()
+  METHOD showResults( oResult )
 ENDCLASS
 
 METHOD new() CLASS TTextRunner
@@ -29,11 +29,11 @@ METHOD new() CLASS TTextRunner
 METHOD ClassName() CLASS TTextRunner
   RETURN ( ::cClassName )
 
-METHOD showResults() CLASS TTextRunner
-  LOCAL aErrors := ::oResult:getErrors(),;
-        aFailures := ::oResult:getFailures(),;
-        nTestCases := ::oResult:getTestCasesCount(),;
-        nAsserts := ::oResult:getAssertCount(),;
+METHOD showResults( oResult ) CLASS TTextRunner
+  LOCAL aErrors := oResult:oData:getErrors(),;
+        aFailures := oResult:oData:getFailures(),;
+        nTestCases := oResult:oData:getTestCasesCount(),;
+        nAsserts := oResult:oData:getAssertCount(),;
         nErrors := LEN( aErrors ),;
         nFailures := LEN( aFailures ),;
         oError, oFailure,;
@@ -56,7 +56,7 @@ METHOD showResults() CLASS TTextRunner
       NEXT
     ENDIF
 
-    IF( nFailures > 0 )    
+    IF( nFailures > 0 )
       ? CRLF, "Failures:", CRLF
 
       FOR i := 1 to nFailures

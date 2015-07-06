@@ -6,5 +6,6 @@ lib\Assert.class.prg
 lib\Test.class.prg
 lib\TestCase.class.prg
 lib\TestResult.class.prg
+lib\TestResultData.class.prg
 lib\TestRunner.class.prg
 lib\TestSuite.class.prg

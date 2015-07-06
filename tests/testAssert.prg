@@ -32,7 +32,7 @@ METHOD new() CLASS TTestAssert
   _Super:new()
   ::cClassName := "TTestAssert"
   RETURN( SELF )
- 
+
  METHOD ClassName() CLASS TTestAssert
    RETURN ( ::cClassName )
 
@@ -46,7 +46,7 @@ METHOD testAssertErrors() CLASS TTestAssert
     ::assert( a, "test variable not found" )
     ::fail( "unable to catch 'Variable not found'" )
   END TRY
-  
+
   RETURN ( nil )
 
 METHOD testLogicals() CLASS TTestAssert
@@ -57,17 +57,17 @@ METHOD testLogicals() CLASS TTestAssert
 
 METHOD testAE() CLASS TTestAssert
   // test with nil
-  ::assert:equals( , nil, "test ::assert:equals nil with nil" )
-  
+  ::assert:equals( nil, nil, "test ::assert:equals nil with nil" )
+
   // test with logicals
   ::assert:equals( .t., .t., "test ::assert:equals with logical .t." )
   ::assert:equals( .f., .f., "test ::assert:equals with logical .f." )
-  
+
   // test with characters
   ::assert:equals( "", '', "test ::assert:equals with empty string" )
   ::assert:equals( " ", ' ', "test ::assert:equals with single space" )
   ::assert:equals( "a", 'a', "test ::assert:equals with single character" )
-  
+
   // test with numerics
   ::assert:equals( 0, 0, "test ::assert:equals on small integers" )
   ::assert:equals( 1234567890, 1234567890.0, "test ::assert:equals on large integers" )
@@ -76,7 +76,7 @@ METHOD testAE() CLASS TTestAssert
   ::assert:equals( 0.1, 0.1, "test ::assert:equals on single decimal float" )
   ::assert:equals( 0.12345678, 0.123456780, "test ::assert:equals on multiple decimal floats" )
   ::assert:equals( 0.01, 0.010000, "test ::assert:equals different decimal floats" )
-  
+
   // test for other types
   RETURN ( nil )
 
@@ -85,7 +85,7 @@ METHOD testANE() CLASS TTestAssert
   ::assert:notEquals( 1234567890, 1234567891, "test ::assert:notEquals on large integers" )
   ::assert:notEquals( -2, -3, "test ::assert:notEquals on small negative integers" )
   ::assert:notEquals( -23452342342342, -23452342342343, "test ::assert:notEquals on large negative integers" )
-  
+
   // test for other types
   RETURN ( nil )
 

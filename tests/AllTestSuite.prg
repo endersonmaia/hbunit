@@ -18,9 +18,9 @@ USER FUNCTION hbunit_test()
   LOCAL oRunner := TTextRunner():new()
   LOCAL oSuite := TTestSuite():new()
 
-  oSuite:AddTest( TTestAssert():new() )
-  oSuite:AddTest( TTestTestSuite():new() )
+  oSuite:addTest( TTestAssert():new() )
+  oSuite:addTest( TTestTestSuite():new() )
 
-  oRunner:Run( oSuite )
+  oRunner:run( oSuite )
 
   RETURN ( nil )

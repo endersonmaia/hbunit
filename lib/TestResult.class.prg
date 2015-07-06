@@ -18,106 +18,61 @@ CLASS TTestResult
   METHOD ClassName()
   DATA cClassName
 
-  METHOD countErrors()
-  METHOD countFailures()
-  METHOD addError( oError )
-  METHOD addFailure( oFailure )
-  METHOD incrementAssertCount()
-  METHOD getErrors()
-  METHOD getFailures()
-  METHOD getTestCasesCount()
-  METHOD getAssertCount()
   METHOD run()
-  
-  PROTECTED:
-    CLASSDATA aErrors       INIT {}
-    CLASSDATA aFailures     INIT {}
-    CLASSDATA nTestCases    INIT 0
-    CLASSDATA nAssertCount  INIT 0
-    
-  HIDDEN:
+
+  DATA oData
+
+HIDDEN:
     METHOD invokeTestMethod()
     METHOD getTestMethods()
 
-    DATA aMethods
 ENDCLASS
 
 METHOD new() CLASS TTestResult
-  ::aMethods := {}
+  ::oData := TTestResultData():new()
   ::cClassName := "TTestResult"
   RETURN( SELF )
 
 METHOD ClassName() CLASS TTestResult
   RETURN ( ::cClassName )
 
-
 METHOD run( oTest ) CLASS TTestResult
-  LOCAL i
-  
-  ::getTestMethods( oTest )
-  ::nTestCases += Len( ::aMethods )
+  LOCAL aTestMethods := ::getTestMethods( oTest ),;
+        nTestMethods := LEN ( aTestMethods ),;
+        i
 
-  FOR i := 1 TO LEN( ::aMethods )
+  ::oData:addTestCaseCount( nTestMethods )
+
+  FOR i := 1 TO nTestMethods
     ::invokeTestMethod( oTest, "SETUP")
-    ::invokeTestMethod( oTest, ::aMethods[i] )
+    ::invokeTestMethod( oTest, aTestMethods[i] )
     ::invokeTestMethod( oTest, "TEARDOWN")
   NEXT
 
-  IF ( ::countFailures() > 0 .or. ::countErrors() > 0)
-    ErrorLevel ( 1 )
-  ENDIF
-
   RETURN ( NIL )
 
-METHOD GetTestMethods( oTest ) class TTestResult
+METHOD getTestMethods( oTest ) CLASS TTestResult
   LOCAL aMethods := __objGetMethodList( oTest ),;
+        aTestMethods := {},;
         i
-  
-  ::aMethods := {}
-  
+
   FOR i := 1 TO LEN( aMethods )
     IF ( LEFT( aMethods[i], 4 ) == "TEST" )
-      AAdd( ::aMethods, aMethods[i] )
+      AAdd( aTestMethods, aMethods[i] )
     ENDIF
   NEXT
 
-  RETURN ( NIL )
+  RETURN ( aTestMethods )
 
-METHOD invokeTestMethod( oTest, cMethod ) class TTestResult
+METHOD invokeTestMethod( oTest, cMethod ) CLASS TTestResult
   LOCAL oError
-  
+
   TRY EXCEPTION
-    __ObjSendMsg( oTest, cMethod )         // invoke the METHOD
-    
+    __ObjSendMsg( oTest, cMethod )
+
   CATCH EXCEPTION oError
-    oError:Args := oTest:ClassName + ":" + cMethod
+    oError:Args := oTest:ClassName() + ":" + cMethod
     ::addError( oError )
   END TRY
+
   RETURN ( NIL )
-
-METHOD countErrors() CLASS TTestResult
-  RETURN ( Len( ::aErrors ) )
-
-METHOD countFailures() CLASS TTestResult
-  RETURN ( Len( ::aFailures ) )
-
-METHOD addError( oError ) CLASS TTestResult
-  RETURN ( AAdd( ::aErrors, oError ) )
-
-METHOD addFailure( oFailure ) CLASS TTestResult
-  RETURN ( AAdd( ::aFailures, oFailure ) )
-
-METHOD incrementAssertCount() CLASS TTestResult
-  RETURN ( ::nAssertCount++ )
-
-METHOD getErrors() CLASS TTestResult
-  RETURN ( ::aErrors )
-
-METHOD getFailures() CLASS TTestResult
-  RETURN ( ::aFailures )
-
-METHOD getTestCasesCount() CLASS TTestResult
-  RETURN ( ::nTestCases )
-
-METHOD getAssertCount() CLASS TTestResult
-  RETURN ( ::nAssertCount )

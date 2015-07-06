@@ -23,7 +23,7 @@ CLASS TTestRunner
 
   PROTECTED:
     METHOD  showResults() VIRTUAL
-    DATA    oResult
+
 ENDCLASS
 
 METHOD new() CLASS TTestRunner
@@ -34,6 +34,5 @@ METHOD ClassName() CLASS TTestRunner
   RETURN ( ::cClassName )
 
 METHOD run ( oTest ) CLASS TTestRunner
-  ::oResult := oTest:run()
-  ::showResults()
+  ::showResults( oTest:run() )
   RETURN ( NIL )
