@@ -21,7 +21,7 @@ CLASS TTestSuite FROM TTest
   METHOD run()
   METHOD countTestCases()
   METHOD addTest( oTest )
-  
+
   PROTECTED:
     DATA aTests
 ENDCLASS
@@ -31,13 +31,13 @@ METHOD new() CLASS TTestSuite
   ::cClassName := "TTestSuite"
   ::aTests := {}
   RETURN ( SELF )
- 
+
 METHOD className() CLASS TTestSuite
   RETURN( ::cClassName )
 
 METHOD run() CLASS TTestSuite
   LOCAL i
-  
+
   FOR i := 1 TO ::countTestCases()
     ::aTests[i]:run()
   NEXT

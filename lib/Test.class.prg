@@ -20,7 +20,7 @@ CLASS TTest
 
   METHOD countTestCases()   VIRTUAL
   METHOD run()              VIRTUAL
-  
+
   PROTECTED:
     DATA oResult
 ENDCLASS

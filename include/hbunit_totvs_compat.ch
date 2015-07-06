@@ -18,7 +18,7 @@
 
 #xcommand ?  [<list,...>] => ConOut( [ <list> ] )
 #xcommand ?? [<list,...>] => ConOut( [ <list> ] )
-
+#xtranslate PROCFILE( <N> ) => ""
 
 // BEGIN __objGetMethodList
 #xtranslate __objGetMethodList( <OBJECT> ) => _ADVPL_OML( <OBJECT> )
