@@ -21,13 +21,30 @@
 
 
 // BEGIN __objGetMethodList
-#xtranslate __objGetMethodList( <OBJECT> ) => __ADVPL__objGetMethodlist( <OBJECT> )
+#xtranslate __objGetMethodList( <OBJECT> ) => _ADVPL_OML( <OBJECT> )
 
-STATIC FUNCTION __ADVPL__objGetMethodlist( OBJECT )
-  LOCAL aAux := ClassMethArr( OBJECT ), aMethods := {}
+STATIC FUNCTION _ADVPL_OML ( oObj )
+  LOCAL aAux := ClassMethArr( oObj ), aMethods := {}
   FOR i := 1 TO LEN( aAux ); AAdd( aMethods, aAux[i][1] ); NEXT
 RETURN ( aMethods )
 // END __objGetMethodList
+
+// BEGIN __objSendMsg
+#xtranslate __objSendMsg( <OBJECT>, <METHOD> ) => _ADVPL_OSM( <OBJECT>, <METHOD> )
+
+STATIC FUNCTION _ADVPL_OSM( oObj, cMethod )
+  LOCAL xRet, bCall, aMethods
+
+  aMethods := _ADVPL_OML( oObj )
+
+  IF ( ASCAN( aMethods, cMethod ) > 0 )
+  	bCall := &("{ |o| o:" + cMethod + "() }")
+  	xRet := EVAL( bCall, oObj )
+  ELSE
+    xRet := .F.
+  ENDIF
+RETURN ( xRet )
+// END __objSendMsg
 
 #xtranslate HIDDEN:     =>
 #xtranslate PROTECTED:  =>
