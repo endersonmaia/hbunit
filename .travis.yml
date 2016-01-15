@@ -1,4 +1,8 @@
 language: c
+env:
+  - HB_VER=3.0.0 HB_DIR=harbour-3.0.0 HB_URL=https://downloads.sourceforge.net/harbour-project/source/3.0.0/harbour-3.0.0-src.zip
+  - HB_VER=3.2-dev HB_DIR=core-master HB_URL=https://github.com/harbour/core/archive/master.zip
+  - HB_VER=3.4-dev HB_DIR=harbour-core-master HB_URL=https://github.com/vszakats/harbour-core/archive/master.zip
 compiler: gcc
 before_install:
   - sudo apt-get -qq update
@@ -8,10 +12,10 @@ before_install:
   - sudo apt-get install -qq zlib1g-dev
   - sudo apt-get install -qq unzip
 install:
-  - wget https://downloads.sourceforge.net/harbour-project/source/3.0.0/harbour-3.0.0.tar.bz2 -O /tmp/harbour-3.0.0.tar.bz2
-  - cd /tmp && tar -xvjf harbour-3.0.0.tar.bz2 && cd -
-  - cd /tmp/harbour-3.0.0 && HB_INSTALL_PREFIX=/usr/local HB_BUILD_3RDEXT=no HB_BUILD_CONTRIBS=xhb make && cd -
-  - cd /tmp/harbour-3.0.0 && sudo make install && cd -
+  - wget $HB_URL -O /tmp/harbour-$HB_VER.zip
+  - cd /tmp && unzip harbour-$HB_VER.zip && cd -
+  - cd /tmp/$HB_DIR && HB_INSTALL_PREFIX=/usr/local HB_BUILD_3RDEXT=no HB_BUILD_CONTRIBS=xhb make && cd -
+  - cd /tmp/$HB_DIR && sudo make install && cd -
   - sudo ldconfig -f /usr/local/etc/ld.so.conf.d/harbour.conf
 script:
   - make
