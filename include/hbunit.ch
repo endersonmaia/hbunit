@@ -14,7 +14,7 @@
 #ifndef _HBUNIT_CH
 #define _HBUNIT_CH
 
-#define _HBUNIT_VERSION 0.0.3-alpha
+#define _HBUNIT_VERSION 0.0.5-alpha
 
 #ifdef __HARBOUR__
   #include "hbclass.ch"
