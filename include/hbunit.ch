@@ -21,7 +21,7 @@
   
   #define CRLF ( CHR(13) + CHR(10) )
 
-  #XTRANSLATE _Super          => super
+  #XTRANSLATE _Super          => ::super
   #XTRANSLATE USER FUNCTION   => FUNCTION
   #XTRANSLATE TRY             => TRYEXCEPTION
   #XTRANSLATE TRY EXCEPTION   => TRYEXCEPTION
